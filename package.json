@@ -1,0 +1,19 @@
+{
+  "name": "babel-macro",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-plugin-codegen": "^3.0.0",
+    "babel-plugin-macros": "^2.4.2",
+    "babel-plugin-preval": "^3.0.1",
+    "idx": "^2.4.0"
+  },
+  "dependencies": {
+    "babel-plugin-idx": "^2.4.0"
+  }
+}
