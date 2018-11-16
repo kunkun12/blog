@@ -3,17 +3,17 @@
 #### Is Babel a compiler or transpiler?
 
 
-babel是我们熟知的JavaScript语法“编译器”、是源码的转译源码的编译器(source-to-source)。官方说是[compiler](https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8)、也有人称之为transpiler(tranform compile)，[Is Babel a compiler or transpiler?]https://stackoverflow.com/questions/43968748/is-babel-a-compiler-or-transpiler)。对我们来说Babel是JavaScript语法转换工具或是翻译工具。bebel编译大致分为三个过程。
+babel是我们熟知的JavaScript语法“编译器”、是源码的转译源码的编译器(source-to-source)。官方说是[compiler](https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8)、也有人称之为transpiler(tranform compile)，[Is Babel a compiler or transpiler?]https://stackoverflow.com/questions/43968748/is-babel-a-compiler-or-transpiler)。对我们来说Babel是JavaScript语法转换工具或是翻译工具。bebel编译大致分为三个过程。
 
-- 1、Parse 词法分析得到 Tokens，JS代码生成 [抽象语法树（AST)](https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9)
-- 2、Transform 操作 AST，完成语法树的转换。
+- 1、Parse 词法分析得到 Tokens，JS代码生成 [抽象语法树（AST)](https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9)
+- 2、Transform 操作 AST，完成语法树的转换。
 - 3、Code Generate 将新的语法树生成代码。
 
 关于babel详细原理以及语法树的知识，可以移步[剖析Babel——Babel总览](http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/)
 
 通过基础的文档我们了解到：
-1、 什么是AST？它是源代码语法结构的一种抽象表示(类似浏览器页面用抽象为DOM树来表示)、方便对编程语言进行语法分析、语法检查、代码风格检查、语法转换、代码优化等，另外像目前的mpvue、taro 也都用到AST转换的思想。可以在[astexplorer](https://astexplorer.net)中查看
-2、语法转换的本质是 将源代码解析为AST、对AST进行遍历（先序深度优先遍历），并对节点进行操作（增、删、改，最后将AST生成代码的过程，这个操作过程采用的是Visitors 模式
+1、 什么是AST？它是源代码语法结构的一种抽象表示(类似浏览器页面用抽象为DOM树来表示)、方便对编程语言进行语法分析、语法检查、代码风格检查、语法转换、代码优化等，另外像目前的mpvue、taro 也都用到AST转换的思想。可以在[astexplorer](https://astexplorer.net)中查看
+2、语法转换的本质是 将源代码解析为AST、对AST进行遍历（先序深度优先遍历），并对节点进行操作（增、删、改，最后将AST生成代码的过程，这个操作过程采用的是Visitors 模式
 3、babel的作用是提供了一套方便进行语法转换的工具。并对语法树的操作进行了封装。
 4、babel官方提供了[丰富的plugin](https://babeljs.io/docs/en/plugins/)来完成语法的转译(比如最新的ES标准、草案、JSX、typescript、flow),一个插件只完成一个特定的功能，启用该功能需要在babel的配置文件里面添加即可，为了方便分享，也方便配置，把插件的列表封装为preset，preset即是一堆插件的集合。官方提供的plugin 一般是用来对目前成型的标准或者草案进行通用的转换，如果我们要根据自己的需求，定制自己的转换规则，受益于babel提供的插件扩展机制，我们很容易的完成对语法树进行操作，完成对代码的转译，只需要关注语法的transform这个关键的步骤，自定义Visitor，利用babel提供的API来方便的操作语法树的节点，其他的工作比如语法树解析，遍历算法、代码生成等 babel帮我们自动完成这些步骤。如果对编写babel插件有兴趣，可以去参考[babel插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)。（这篇文章写很详细，熟悉之后写插件没啥问题了， 如果第一次看，不用害怕，细心的看下去，多看一遍，可能一些陌生的词汇有些唬人，利用Babel API操作AST ，相当于使用jQuery来操作DOM树）。学会利用显示AST的神器[astexplorer](https://astexplorer.net) 
 
