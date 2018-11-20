@@ -8,12 +8,14 @@
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
+    "@babel/plugin-proposal-decorators": "7.1.6",
     "babel-plugin-codegen": "^3.0.0",
     "babel-plugin-macros": "^2.4.2",
     "babel-plugin-preval": "^3.0.1",
     "idx": "^2.4.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "babel-plugin-idx": "^2.4.0"
   }
 }

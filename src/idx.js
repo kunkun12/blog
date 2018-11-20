@@ -5,3 +5,4 @@ function getFriends() {
 };
 
 
+const a = 1

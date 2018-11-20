@@ -1,8 +1,5 @@
-// @codegen
-const array = ['apple', 'orange', 'pear']
-module.exports = array
-  .map(fruit => `export const ${fruit} = '${fruit}';`)
-  .join('')
 
-
+  async function aa(){
+   return  await 1
+  }
   //codegen`module.exports=(function(){return (1+1).toString()}())`
