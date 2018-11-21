@@ -1,9 +1,14 @@
 {
     "presets": [
         [
-            "@babel/env",
+            "@babel/env"
+        ]
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-proposal-decorators",
             {
-                "useBuiltIns":"usage"
+                "legacy": true
             }
         ]
     ]

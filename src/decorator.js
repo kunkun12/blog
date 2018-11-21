@@ -1,5 +1,16 @@
-@annotation
-class MyClass { }
-function annotation(target) {
-   target.annotated = true;
+
+@defineElement('num-counter')
+class Counter extends HTMLElement {
+
+  constructor() {
+    super();
+ 
+  }
+
+  connectedCallback() { this.render(); }
+
+  @bound
+  render() {
+
+  }
 }
