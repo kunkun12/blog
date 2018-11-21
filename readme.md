@@ -111,7 +111,7 @@ babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-pre
     require("regenerator-runtime/runtime");
     require("core-js/modules/es6.promise");
 ```
-官方提供的plugin 一般是用来对目前成型的标准或者草案进行通用的转换，如果我们要根据自己的需求，定制自己的转换规则，受益于babel提供的插件扩展机制，我们很容易的完成对语法树进行操作，完成对代码的转译，只需要关注语法的transform这个关键的步骤，自定义Visitor，利用babel提供的API来方便的操作语法树的节点，其他的工作比如语法树解析，遍历算法、代码生成等 babel帮我们自动完成这些步骤。如果对编写babel插件有兴趣，可以去参考[babel插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)。（这篇文章写很详细，熟悉之后写插件没啥问题了， 如果第一次看，不用害怕，细心的看下去，多看一遍，可能一些陌生的词汇有些唬人，利用Babel API操作AST ，相当于使用jQuery来操作DOM树）。学会利用显示AST的神器[astexplorer](https://astexplorer.net) 或者 http://esprima.org/demo/parse.html 或者 使用[JAVASCRIPT AST VISUALIZER](https://resources.jointjs.com/demos/rappid/apps/Ast/index.html)可视化查看语法树结构
+官方提供的plugin 一般是用来对目前成型的标准或者草案进行通用的转换，如果我们要根据自己的需求，定制自己的转换规则，受益于babel提供的插件扩展机制，我们很容易的完成对语法树进行操作，完成对代码的转译，只需要关注语法的transform这个关键的步骤，自定义Visitor，利用babel提供的API来方便的操作语法树的节点，其他的工作比如语法树解析，遍历算法、代码生成等 babel帮我们自动完成这些步骤。如果对编写babel插件有兴趣，可以去参考[babel插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)。（这篇文章写很详细，熟悉之后写插件没啥问题了， 如果第一次看，不用害怕，细心的看下去，多看一遍，可能一些陌生的词汇有些唬人，利用Babel API操作AST ，相当于使用jQuery来操作DOM树）。学会利用显示AST的神器[astexplorer](https://astexplorer.net) 或者 http://esprima.org/demo/parse.html 或者 使用[JAVASCRIPT AST VISUALIZER](https://resources.jointjs.com/demos/rappid/apps/Ast/index.html)可视化查看语法树结构
 
 社区中有一些为了满足特定需求的plugin，对实际项目开发中很有用处，这里介绍几个
 babel 通过配置文件来选择应用哪些插件，支持[多种配置方式](https://babeljs.io/docs/en/configuration)。
