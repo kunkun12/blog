@@ -1,8 +1,8 @@
-#  Babel、Babel plugins、babel macros 介绍
+#  关于 Babel、Babel plugins、Babel macros 
 
 ### compiler or transpiler?
 
-(本文叙述的内容所涉及到的相关特性以babel V7为准)
+(本文叙述的内容所涉及到的相关特性以Babel V7为准)
 
 Babel :原名6to5, 2015年更名为babel，取名灵感来自于[BabelFish](https://en.wikipedia.org/wiki/List_of_races_and_species_in_The_Hitchhiker%27s_Guide_to_the_Galaxy#Babel_fish) 是一种虚拟出来的鱼,可以翻译任何物种的语言，，Babel也不负盛名，成了目前最知名的JavaScript语法“编译器”、一种源码转译源码到编译器(source-to-source)。官方说是[compiler](https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8)、也有人称之为transpiler(转译器)，stackoverflow也有人提问[Is Babel a compiler or transpiler?](https://stackoverflow.com/questions/43968748/is-babel-a-compiler-or-transpiler)。总结一下大致意思，编译器是将一种语言转为另一种相对低级一些的语言（比如 Java到字节码。C到二进制)。 转移器是将一种语言转为另一种同等级别的代码(比如JavaScript to python),那么ES6 到 ES5 算同一个level的转换吗？？自行理解吧。 
 对我们来说Babel是JavaScript语法转换工具或是翻译工具,因此不必太纠结compiler还是transpiler 。除了能够转换标准ES以及草案之外，它还支持JSX、typescript、flow。 另外babel方便的插件扩展机制，众多的开发者也相继开发出许多babel插件，让babel不只是作为一个工具 更是一个平台
@@ -194,7 +194,7 @@ const BASE_URL = env({
 宏为我们提供了解决问题的另一种思路,所有的宏都以/macro为后缀，在代码中显示引用，在需要的地方调用具体的 宏，也能方便对功能的理解（使用插件，语法被转换了，可能不清楚是什么原因造成的)，增加新的宏也不需要修改babel的配置，同时也能避免插件顺序配置问题导致的冲突。这里有一些可用的[宏列表](https://github.com/jgierer12/awesome-babel-macros) 另外把插件转换为宏也很容易，比如 上面介绍的 preval、和codegen插件就有对应的 preval.macro 和 codegen.macro。也有人[基于codegen.macro来实现国际化方案](https://medium.freecodecamp.org/using-babel-macros-with-react-native-8615aaf5b7df)。另外更好的国际化方案可以使用 [@lingui/macro](https://lingui.js.org/ref/macro.html)
 
 
-#### 总结 通过本篇 希望能对babel有一些了解，更多的是介绍介绍一些思路以及学习方向，很多东西要写，受限于笔墨，不敢写太多，里面涉及到的知识点，都可以深入来研究，另外文章中涉及链接文章都有很好的指导意义。
+### 总结 通过本篇 希望能对babel有一些了解，更多的是介绍介绍一些思路以及学习方向，很多东西要写，受限于笔墨，不敢写太多，里面涉及到的知识点，都可以深入来研究，另外文章中涉及链接文章都有很好的指导意义。
 
 ### 学习资料 这些看完就成babel高手了
 - [babel官网](https://babeljs.io/docs/en/) [以及相关博客](https://babeljs.io/blog/)
