@@ -172,10 +172,9 @@ babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-pre
 
 - penv.macro 它能用来在一个代码文件中统一管理你的环境变量, 并且只保留与当前环境变量匹配的值。与当前环境无关的代码被移除，确保不会将与指定环境不相干的代码发布到对应的环境上.
 
-  1、 npm install --save-dev babel-plugin-macros 修改babel配置文件在plugins中 添加 macros （使用宏功能必须有这一步，提供一个运行宏的环境）
-  2、 npm install penv.macro --save-dev
-
-源码
+1. `npm install --save-dev babel-plugin-macros` 修改babel配置文件在plugins中 添加 macros （使用宏功能必须有这一步，提供一个运行宏的环境）
+2. `npm install penv.macro --save-dev`
+3. 编写源码
 ``` JavaScript
 import env from 'penv.macro'
 
@@ -194,9 +193,10 @@ const BASE_URL = env({
 宏为我们提供了解决问题的另一种思路,所有的宏都以/macro为后缀，在代码中显示引用，在需要的地方调用具体的 宏，也能方便对功能的理解（使用插件，语法被转换了，可能不清楚是什么原因造成的)，增加新的宏也不需要修改babel的配置，同时也能避免插件顺序配置问题导致的冲突。这里有一些可用的[宏列表](https://github.com/jgierer12/awesome-babel-macros) 另外把插件转换为宏也很容易，比如 上面介绍的 preval、和codegen插件就有对应的 preval.macro 和 codegen.macro。也有人[基于codegen.macro来实现国际化方案](https://medium.freecodecamp.org/using-babel-macros-with-react-native-8615aaf5b7df)。另外更好的国际化方案可以使用 [@lingui/macro](https://lingui.js.org/ref/macro.html)
 
 
-### 总结 通过本篇 希望能对babel有一些了解，更多的是介绍介绍一些思路以及学习方向，很多东西要写，受限于笔墨，不敢写太多，里面涉及到的知识点，都可以深入来研究，另外文章中涉及链接文章都有很好的指导意义。
+### 总结
+通过本篇 希望能对babel有一些了解，更多的是介绍介绍一些思路以及学习方向，很多东西要写，受限于笔墨，不敢写太多，里面涉及到的知识点，都可以深入来研究，另外文章中涉及链接文章都有很好的指导意义。
 
-### 学习资料 这些看完就成babel高手了
+##### 学习资料 这些好好看完就成babel高手了
 - [babel官网](https://babeljs.io/docs/en/) [以及相关博客](https://babeljs.io/blog/)
 - [Babel 插件开发](https://xiaoiver.github.io/coding/2018/05/12/Babel-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91.html)
 - [http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/](http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/)
