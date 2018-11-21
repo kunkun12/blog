@@ -123,7 +123,7 @@ babel 通过配置文件来选择应用哪些插件，支持[多种配置方式]
 babel macro的出现让我们可以在应用代码里面 引入语法转换的macro，动态的对指定的代码设置编译的规则。栗子。
 babel里面有个babel-plugin-idx的插件，目的是解决多层属性访问，可能对空值取属性报错的问题。比如 *props.user.friends[0].friends* 代码中，若 user为null则代码就会报错，使用babel-plugin-idx之后 会自动转化为这种代码。先判断值是否为空。具体使用如下。
 
-preval 执行代码，返回代码执行的结果，关注点是 返回代码的执行结果
+preval 执行代码，返回代码执行的结果，关注点是 返回代码的执行结果
 codegen 执行代码，返回的是可以执行的代码，关注点是生成代码，嵌入到当前的程序中,功能更强大。
 
 这个时候就有一种需求：在应用的代码里面动态为特定的代码应用指定的语法转换，babel 7.0的新特性中 有一项 只不过“babel-macros” 在一定程度上解决了这个问题，macros翻译为“宏”，之前在C语言里面有 宏的概念，关键字define关键字进行定义，在预编译阶段对于应用宏的地方进行简单的字符串替换。babel macros目的让我们不修改babel的配置文件的前提下，编写代码里面导入特定的macro，按照一定规则编码，在babel 编译的时候，使用执行该宏对代码进行预处理（根据宏的规则对代码进行替换），babel macros 的想法的来源于[create-react-app的一个issue](https://github.com/facebook/create-react-app/issues/2730)，目前macros 已经在这个项目中使用了。宏的功能与babel plugin功能上差不多，babel plugin的引入需要在babel的配置文件中添加配置，只是宏是让我们可以对手动指定的代码进行语法转换的。babel 有许多plugin，也有许多的macro可用，不同的宏功能不同。plugin与macro的使用方式不同。
