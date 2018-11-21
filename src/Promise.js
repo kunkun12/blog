@@ -1,11 +1,5 @@
 
 
-new Promise(function(){
-
-})
-
-
-async function test(){
-   let a =  await 1
-   return a
+async function name(params) {
+    await 1
 }
