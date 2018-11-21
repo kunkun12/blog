@@ -1,6 +1,6 @@
-###  Babel、Babel plugins、babel macros 
+#  Babel、Babel plugins、babel macros 
 
-#### Is Babel a compiler or transpiler?
+### compiler or transpiler?
 
 (本文叙述的内容以babel V7为准)
 babel :原名6to5, 2015年更名为babel，取名灵感来自于[BabelFish](https://en.wikipedia.org/wiki/List_of_races_and_species_in_The_Hitchhiker%27s_Guide_to_the_Galaxy#Babel_fish)) 是一种虚拟出来的鱼可以翻译任何物种的语言，不负盛名，Babel是目前最知名的JavaScript语法“编译器”、一种源码转译源码到编译器(source-to-source)。官方说是[compiler](https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8)、也有人称之为transpiler(tranform compile)，stackoverflow也有人提问[Is Babel a compiler or transpiler?](https://stackoverflow.com/questions/43968748/is-babel-a-compiler-or-transpiler)。编译器:一种语言编译为另一种低级一些的语言 比如 Java到字节码。C到二进制) 转移器：一种语言转为另一种同等级别的代码(比如JavaScript to python),那么ES6 到 ES5 算同一个level的转换吗？？自行理解吧。 对我们来说Babel是JavaScript语法转换工具或是翻译工具,因此不必太纠结compiler还是transpiler 。除了能够转换ES之外还支持JSX、typescript、flow。 babel方便的插件扩展机制，众多的开发者也相继开发出许多babel插件，让babel不只是作为一个工具 更是一个平台
@@ -19,28 +19,29 @@ babel :原名6to5, 2015年更名为babel，取名灵感来自于[BabelFish](http
 - 3、Code Generate 将新的语法树生成代码。
 
 总结 ：输入字符串 -> @babel/parser parser -> AST -> traverse ->@babe/plugin--xxxx-> AST -> @babel/generator -> 输出字符串
-##### 辅助包
+#### 辅助包
 -  @babel/types 、@babel/template 、@babel/helpers、@babel/code-frames  方便操作语法树、提供的工具类
 -  @babel/polyfill。ES标准中包括两部分: 新增的语法+新增的API。 Babel编译流程只提供了语法的转换(比如const、let、async、await、箭头函数等）， babel/polyfill来提供 ES标准新增的原生对象以及API模拟实现（比如Promise、Map、Set、Object.assign、Array.from、Object.assig等），其实@babel/polyfill上仅仅是core-js和regenerator-runtime两个包的[简单封装](https://github.com/babel/babel/blob/master/packages/babel-polyfill/src/index.js)，之前版本中我们都是在文件的收口处手动的引入babel polyfill。整个PolyFill文件较大、没必要全部导入、也没必要手动导入、在babel V7之后推荐新的使用方法。通过配置 env选项的时候添加 ` "useBuiltIns":"usage"`,会自动分析代码根据需求来按需针对性的导入polyfill。另外polyfill是全局导入的，像`Array.prototype.includes`还会修改原生函数的原型。polyfill只包含了超过stage4以上的规范。如果要使用更高级草案标准的API 需要自己手动去引入[core-js](https://github.com/zloirock/core-js)里面的函数。举个例子 .babel配置文件如下
-
+``` javascript
         {
             "presets": [["@babel/env", {
                 "useBuiltIns": "usage"
             }]]
         }
-       
+```
 源码 
+``` javascript
             var str = '   foo  ';
             str.trimLeft();
             str.padStart(10);
-
+```
 babel 输出结果 
-
+``` javascript
         require("core-js/modules/es7.string.pad-start");
         var str = '   foo  ';
         str.trimLeft();
         str.padStart(10);
-
+```
 padStart 是 ES(7) 正式版的规范，因此会自动引入pad-start的polyfill、而 [`trimLeft`](https://github.com/tc39/proposal-string-left-right-trim)截止目前还在 `Stage 3`。需要自己手动引入`core-js(-pure)/features/string/trim-left`。（每一项新特性，要最终纳入ECMAScript规范中，TC39拟定了一个处理过程，称为TC39 process、其中共包含5个阶段，Stage 0 ~ Stage 4 stage0开始有初级的想法，不断升级到stage4基本才算是稳了的规范）
 
 既然说到polyfill了 还得说一个函数 `regeneratorruntime` 这个函数也被算在了babel-polyfill里面了，它不是ES规范里面的，只是babel在做async/await 语法转换的时候，转换后的结果代码调用到了这个函数，并没有这个函数的定义，所以要让代码能够正常运行，必须引入这个函数，当然如果按 `"useBuiltIns": "usage"`使用的话，业务里面如果用到async/await 会自动引入这个东西的。
@@ -52,7 +53,7 @@ padStart 是 ES(7) 正式版的规范，因此会自动引入pad-start的polyfil
 - @babel/node nodeJS环境下使用babel的功能，由于性能问题不得在生产环境下使用
 - @babel/register 通过绑定node.js的require来自动转译require引用的js代码文件
 
-####  语法转换 Babel Plugin
+###  Babel Plugin
 
 上面已经介绍过babel语法转换流程主要包含三个步骤：词法分析语法分析生成AST->Plugin操作AST->生成代码
 
@@ -62,9 +63,9 @@ padStart 是 ES(7) 正式版的规范，因此会自动引入pad-start的polyfil
 
 Babel语法转换的本质是 将源代码解析为AST后、对AST进行遍历（先序深度优先遍历），并对节点进行操作（增、删、改，最后将AST生成代码的过程，这个操作过程采用的是Visitors 模式对节点进行访问，每一个visitor在babel里面有babel-plugin承担。babel-core负责解析语法，每一个语法的转换需要一个单独的plugin来变更AST，转换后的AST生成代码也由babel自动完成。babel官方包内置了一些[丰富的plugin](https://babeljs.io/docs/en/plugins/)来完成语法的转译(比如最新的ES标准/草案、JSX、typescript、flow),一个插件只完成一个特定的功能，启用该功能需要在babel的配置文件里面添加即可，为了方便分享，也方便集中配置，把插件的列表封装为preset，preset即是一堆插件的组合合。babel的插件启用需要单独配置，支持多种配置方式 使用 `babel.config.js` `.babelrc` `.babelrc.js` 或者package.json中添加 babel的属性.[官方也有详细的介绍](https://babeljs.io/docs/en/config-files)。
 
-#### Plugin配置
+### Plugin配置
 （[官网写的很清楚](https://babeljs.io/docs/en/config-files)，感觉没必要多写）简单提一下，Preset是plugin组合，翻译过来叫"预设"，官网的提供的一些预设（env、flow、react、typescript）我们也能很容易的创造自己的预设，比如create-react-app ，react-native都是自定义了preset，preset可以有预设和plugin组成。自定义预设也跟配置 babel.config.js类似。另外babel在执行的时候
-
+``` javascript
         module.exports = () => ({
             presets: [
                 require("@babel/preset-env"),
@@ -74,25 +75,42 @@ Babel语法转换的本质是 将源代码解析为AST后、对AST进行遍历�
                 require("@babel/plugin-proposal-object-rest-spread"),
             ],
         });
+```
 babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)来转换正式版ES语法，目前preset-env=ES3+ES5+ES2015+ES2016+ES2017，对于目前处于草案的语法需要手动添加相关plugin。具体到特定的语法是否为草案还是正式标准可以去[babel的插件列表](https://babeljs.io/docs/en/plugins)看一下，不要被这么多插件吓到，其实除了env大部分用不到的。另外关于他们的执行顺序，遍历到每个节点的时候，都会按规则来执行plugin和preset。执行规则就是 :先执顺序行完所有Plugin，再逆序执行Preset。这个配置的时候可能注意、留个心。有时候出错的话，可能跟这个执行顺序有关。仔细想一下，那么多节点，都要被每个插件轮流执行一遍。这个对性能影响也是很大的。所以尽量用具体的babel plugin来配置，干掉stage的preset也避免了这个问题。如果不配置插件任何插件以及preset、babel会不做任何转换 输出最初的代码 。简单介绍下对async/await以及decorators配置方式。
 
 - async/await 属于ES7的正式版发布了，理论上来说配置下env即可以使用了，但是上面也有提到 babel的plugin只做语法转换，通过env的配置可以将async，await语法转换为旧式的语法。但是新的代码里面使用了Promise 和 regeneratorRuntime 这两个API。
 
 如果配置为 
 
-        {
-            "presets": [["@babel/env"]]
-        }
-
+``` javascript
+    {
+        "presets": [["@babel/env"]]
+    }
+```
 源码 
+``` javascript
     async function name(params) {
         await 1
     }
-
+```
 转化后的代码为
+![](https://raw.githubusercontent.com/kunkun12/blog/master/imgs/1.jpg)
+很明显这个代码是执行的话 报错 regeneratorRuntime，对于不支持Promise的浏览器也会 没有定义。将配置中添加
+``` javascript
+    {
+        "presets": [["@babel/env", {
+            "useBuiltIns": "usage"
+        }]]
+    }
+```
+编译之后的代码为
+![](https://raw.githubusercontent.com/kunkun12/blog/master/imgs/2.jpg)
+发现顶部多了如下两行代码 引入了 如上两个方法的polyfill
 
-![](./image/1.jpg)
-
+``` javascript
+    require("regenerator-runtime/runtime");
+    require("core-js/modules/es6.promise");
+```
 官方提供的plugin 一般是用来对目前成型的标准或者草案进行通用的转换，如果我们要根据自己的需求，定制自己的转换规则，受益于babel提供的插件扩展机制，我们很容易的完成对语法树进行操作，完成对代码的转译，只需要关注语法的transform这个关键的步骤，自定义Visitor，利用babel提供的API来方便的操作语法树的节点，其他的工作比如语法树解析，遍历算法、代码生成等 babel帮我们自动完成这些步骤。如果对编写babel插件有兴趣，可以去参考[babel插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)。（这篇文章写很详细，熟悉之后写插件没啥问题了， 如果第一次看，不用害怕，细心的看下去，多看一遍，可能一些陌生的词汇有些唬人，利用Babel API操作AST ，相当于使用jQuery来操作DOM树）。学会利用显示AST的神器[astexplorer](https://astexplorer.net) 或者 http://esprima.org/demo/parse.html 或者 使用[JAVASCRIPT AST VISUALIZER](https://resources.jointjs.com/demos/rappid/apps/Ast/index.html)可视化查看语法树结构
 
 社区中有一些为了满足特定需求的plugin，对实际项目开发中很有用处，这里介绍几个
