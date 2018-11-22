@@ -233,7 +233,7 @@ const BASE_URL = env({
 
 ### One More things 关于babel作者的八卦
 
-6to5 的作者 Sebastian McKenzie是个澳大利亚人，8岁的时候发布的自己第一个网站，2014年17岁的在高中的时候开始玩github 然后第一次commit 就是 6to5，在项目上很上心，bug反馈几分钟之后就能被修复，因为一直盯着电脑，没有别的事情做。。。不喜欢上学，成绩不好，没有上大学，想找个nodeJS 初级工程师的工作，简历上也附上自己项目的代码，然而也多次碰壁，对他做的事情也不感兴趣。。辛苦之下好不容易在11月在悉尼份找到一份工作，没谈薪资就把offer接了。干了三个月去伦敦CloudFlare。2015年去了美国加入了CloudFlare 可以开心的写node了。。。2015.2月 年6to5 改名为Babel。[2015-6月 facebook 宣布 React and React Native的构建系统基于Babel替换自家的自家的JSTransform](https://reactjs.org/blog/2015/06/12/deprecating-jstransform-and-react-tools.html) ，一个月之后 Sebastian 加入facebook。
+6to5 的作者 Sebastian McKenzie是个澳大利亚人，8岁的时候发布的自己第一个网站，2014年17岁的在高中的时候开始玩github 然后第一次commit 就是 6to5，在项目上很上心，bug反馈几分钟之后就能被修复，因为一直盯着电脑，没有别的事情做。。。不喜欢上学，成绩不好，没有上大学，想找个nodeJS 初级工程师的工作，简历上也附上自己项目的代码，然而也多次碰壁，对他做的事情也不感兴趣。。辛苦之下好不容易在11月在悉尼份找到一份工作，没谈薪资就把offer接了。干了三个月去伦敦CloudFlare。2015年去了美国加入了CloudFlare 可以开心的写node了。。。2015.2月 年6to5 改名为Babel。[2015-6月 facebook 宣布 React and React Native的构建系统基于Babel替换自家的JSTransform](https://reactjs.org/blog/2015/06/12/deprecating-jstransform-and-react-tools.html) ，同年七月 Sebastian 加入facebook。
 
 #### 学习资料 这些好好看完就成babel高手了
 - [babel官网](https://babeljs.io/docs/en/)、 [以及相关博客](https://babeljs.io/blog/)
