@@ -4,7 +4,7 @@
 
 (本文叙述的内容所涉及到的相关特性以Babel V7为准)
 
-Babel :原名6to5 2014.9发布第一个版本, 2015年更名为babel，最初是个人项目 目前有团队来为主，取名灵感来自于[BabelFish](https://en.wikipedia.org/wiki/List_of_races_and_species_in_The_Hitchhiker%27s_Guide_to_the_Galaxy#Babel_fish) 是一种虚拟出来的鱼,可以翻译任何物种的语言，，Babel也不负盛名，成了目前最知名的JavaScript语法“编译器”、一种源码转译源码到编译器(source-to-source)。官方说是[compiler](https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8)、也有人称之为transpiler(转译器)，stackoverflow也有人提问[Is Babel a compiler or transpiler?](https://stackoverflow.com/questions/43968748/is-babel-a-compiler-or-transpiler)。总结一下大致意思，编译器是将一种语言转为另一种相对低级一些的语言（比如 Java到字节码。C到二进制)。 转移器是将一种语言转为另一种同等级别的代码(比如JavaScript to python),那么ES6 到 ES5 算同一个level的转换吗？？自行理解吧。 
+Babel :原名6to5 2014.9发布第一个版本, 2015.2更名为babel，由团队来为维护，Babel取名灵感来自于[BabelFish](https://en.wikipedia.org/wiki/List_of_races_and_species_in_The_Hitchhiker%27s_Guide_to_the_Galaxy#Babel_fish) 是一种虚拟出来的鱼,可以翻译任何物种的语言，Babel也不负盛名，成了目前最知名的JavaScript语法“编译器”、一种源码转译源码到编译器(source-to-source)。官方说是[compiler](https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8)、也有人称之为transpiler(转译器)，stackoverflow也有人提问[Is Babel a compiler or transpiler?](https://stackoverflow.com/questions/43968748/is-babel-a-compiler-or-transpiler)。总结一下大致意思，编译器是将一种语言转为另一种相对低级一些的语言（比如 Java到字节码。C到二进制)。 转移器是将一种语言转为另一种同等级别的代码(比如JavaScript to python),那么ES6 到 ES5 算同一个level的转换吗？？自行理解吧。 
 对我们来说Babel是JavaScript语法转换工具或是翻译工具,因此不必太纠结compiler还是transpiler 。除了能够转换标准ES以及草案之外，它还支持JSX、typescript、flow。 另外babel方便的插件扩展机制，众多的开发者也相继开发出许多babel插件，让babel不只是作为一个工具 更是一个平台
 
 ### babel的组成
@@ -49,16 +49,16 @@ babel 编译输出结果
 ```
 `String.prototype.padStart` 是 ES(7) 正式版的规范，因此会自动引入pad-start的polyfill、而 [`trimLeft`](https://github.com/tc39/proposal-string-left-right-trim)截止目前还在 `Stage 3`。需要自己手动引入`core-js(-pure)/features/string/trim-left`。
 
-        每一项新特性，要最终纳入ECMAScript规范中，TC39拟定了一个处理过程，称为[TC39 process](https://tc39.github.io/process-document/)、其中共包含5个阶段，[Stage 0 ~ Stage 4](https://tc39.github.io/process-document/) 
-        stage-0: 稻草人-只是一个大胆的想法
-        stage-1: 提案-初步尝试
-        stage-2: 初稿-完成初步规范
-        stage-3: 候选-完成规范和浏览器初步实现
-        stage-4: 完成-将被添加到下一年发
+        对于每一项新特性，要最终纳入ECMAScript规范中，TC39拟定了一个处理过程，称为[TC39 process](https://tc39.github.io/process-document/)、其中共包含5个阶段
+        stage-0: (稻草人)只是一个想法
+        stage-1: (提案)初步尝试
+        stage-2: (曹稿)初步规范
+        stage-3: (候选)完成规范和浏览器初步实现
+        stage-4: (定稿)代发版
 
 既然说到polyfill了 还得说一个函数 :`regeneratorruntime`, 这个函数也被算在了babel-polyfill里面了，它不是ES规范新增的API，只是babel在做async/await 语法转换的时候，转换后的结果代码调用到了这个函数，转换结果并没有提供这个函数的定义，所以要让代码能够正常运行，必须要引入`regeneratorruntime`这个函数，如果配置babel的时候 env里面设置 `"useBuiltIns": "usage"`属性，业务里面如果用到async/await 会自动引入regeneratorruntime这个polyfill
 
-- @babel/runtime：功能类似babel-polyfill，提供了一些帮助函数(regeneratorruntime 等一些代码正常执行需要的辅助函数)以及非实例方法（Array.from,Object.assign、Promise、Map等)的shim，一般用于library或plugin中，最大好处减少工具代码重复引用、且不会污染全局作用域，配合[babel/plugin-transform-runtime](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-runtime)插件使用 更多信息可以参考[babel-polyfill 和 runtime的区别](https://segmentfault.com/q/1010000005596587)
+- @babel/runtime：功能类似babel-polyfill，提供了一些帮助函数(regeneratorruntime、_classCallCheck 等一些转换后的代码 里面用到的一些函数)以及非实例方法（Array.from,Object.assign、Promise、Map等)的shim，一般用于library或plugin中，最大好处减少工具代码重复引用、且不会污染全局作用域，配合[babel/plugin-transform-runtime](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-runtime)插件使用 更多信息可以参考[babel-polyfill 和 runtime的区别](https://segmentfault.com/q/1010000005596587)
 
 #### 其他工具
 - @babel/cli babel命令行工具
@@ -145,7 +145,28 @@ babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-pre
 ```
 运行babel之后编译的代码为
 ![](https://raw.githubusercontent.com/kunkun12/blog/master/imgs/2.jpg)
-，可以看到 _regenerator(即regeneratorRuntime)以局部变量的形式被引入了，非上面的全局作用域。另外 `asyncToGenerator`也作为一个工具函数被提取至`@babel/runtime`,通过导入包，以局部变量的形式在代码里面呈现。另外由于编译后的代码在执行的时候用到了 `@babel/runtime` 包里面的代码，因此安装依赖的包的时候，根据原则将安装到dependencies里面（--save) 。那么还有个问题，asyncToGenerator用了Promise，对于不支持Promise的浏览器依然会报错。
+，可以看到 _regenerator(即regeneratorRuntime)以局部变量的形式被引入了，非上面的全局作用域。另外 `asyncToGenerator`也作为一个工具函数被提取至`@babel/runtime`,通过导入包，以局部变量的形式在代码里面呈现。另外由于编译后的代码在执行的时候用到了 `@babel/runtime` 包里面的代码，因此安装依赖的包的时候，根据原则将安装到dependencies里面（--save) 。那么还有个问题，asyncToGenerator用了Promise，对于不支持Promise的浏览器依然会报错。解决方案就是 将corejs属性设置为2，意思是从 `@babel/runtime-corejs2`中去加载polyfill，这个里面asyncToGenerator里面包含了必要的依赖 比如`Promise` .需要先需要安装 runtime-corejs2: `npm install @babel/runtime-corejs2 --save`。设置完毕之后，重新编译代码结果(自行与上图对比前三行代码)
+![](https://raw.githubusercontent.com/kunkun12/blog/master/imgs/2.jpg)
+
+查阅了一下 `@babel/runtime-corejs2/helpers/asyncToGenerator`模块 第一行也确实引入了promise，部分内容如下
+``` javascript
+var _Promise = require("../core-js/promise");
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    _Promise.resolve(value).then(_next, _throw);
+  }
+```
 
 #### 关于 decrotors 语法支持
 “Decorators”从好三年前就开始炒的特性，这个特性在`Typescript` 、 `angular`、 `mobx`中广为使用，然而经过多年的努力，`Decorators`的是目前仍然处于`Stage2`，babel官方从babel 5 就有支持 `Decorators`的plugin，因为草案不稳定的原因，在babel6中从内置插件中移除了对“装饰器”语法转换的支持，之前我们都是使用 “民间”的第三方插件(babel-plugin-transform-decorators-legacy)来转换装饰器语法，babel7中把这个插件纳入了babel的内置插件列表中,名字也改为 [`@babel/plugin-proposal-decorators` ](https://babeljs.io/docs/en/babel-plugin-proposal-decorators)。配置起来比较简单
@@ -166,22 +187,26 @@ babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-pre
 - [babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import) 在import阶段进行转换，只导入需要的文件，将导入整个库的代码转为只导入单个的组件文件、避免导入整个库。适用于 antd, antd-mobile, lodash, material-ui
 - [babel-plugin-preval](https://www.npmjs.com/package/babel-plugin-preval) 在nodeJS环境下执行代码返回函数执行的结果。
 - [babel-plugin-codegen](https://www.npmjs.com/package/babel-plugin-codegen) 在nodeJS环境下执行代码，返回的结果字符串，作为JavaScript语句表达式插入到代码中 比如楼上功能更强
-- [babel-plugin-transform-remove-console] 功能如其名
+- babel-plugin-transform-remove-console 功能如其名
 
 
 
 ### Babel macros
 
-这个时候就有一种需求：不改变babel配置的情况下，在应用的代码里面动态为特定的代码应用指定的语法转换，babel macros就是满足为了这个需求，babel macros 的想法的来源于[create-react-app的一个issue](https://github.com/facebook/create-react-app/issues/2730)，目前macros 已经在这个项目中使用了。宏的功能与babel plugin功能上差不多，babel plugin的引入需要在babel的配置文件中添加配置，只是宏是让我们可以对手动指定的代码进行语法转换的。babel 有许多plugin，也有许多的macro可用，不同的宏功能不同。macro的出现让我们在代码中手动的使用babel的转换功能。
+关于Babel插件的使用也有一些小问题:
+
+- 在看一个项目的代码的时候，无法确定代码是否要经由一个插件转换，容易造成迷惑
+- 启用一个插件 必须修改babel的配置文件或者webpack的配置
+- 遍历节点的时候，执行多个插件 可能会造成冲突，带来困扰
+这个时候就有一种需求：不改变babel配置的情况下，在应用的代码里面动态为特定的代码应用指定的语法转换，babel macros就是满足为了这个需求，babel macros 的想法的来源于[create-react-app的一个issue](https://github.com/facebook/create-react-app/issues/2730)，目前macros已经在create-react-app中使用了，(create-react-app不推荐用户自行修改配置文件)。宏的功能与babel plugin功能上差不多，babel plugin的引入需要在babel的配置文件中添加配置，只是宏是让我们可以对手动指定的代码进行语法转换的。babel 有许多plugin，也有许多的macro可用，不同的宏功能不同。macro的出现让我们在代码中手动的使用babel的转换功能。
 
 
-如果是使用macros 需要先安装babel-plugin-macros，启用macros的能力 `npm install --save-dev babel-plugin-macros` 。babel-plugin-macros 不是一个具体的macro，只是给macro提供了一个运行的平台，不具有转换特定代码的功能，这里可以查看具体可用[macros列表](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/macros.md) 根据需求安装对应的macros 在代码里面使用即可。说了这么多还是不直观，下面以`penv.macro`介绍下具体如何使用宏。
+如果是使用macros 需要先安装babel-plugin-macros，启用macros的能力 `npm install --save-dev babel-plugin-macros` 。babel-plugin-macros 不是一个具体的macro，只是给macro提供了一个运行的平台，不具有转换特定代码的功能，第一次使用宏的时候，需要在babel配置文件`plugins`里面添加`macros`、之后使用具体的宏不需要再改babel的配置。这里可以查看具体可用的[macros](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/macros.md) 根据需求安装对应的macros 在代码里面使用即可。说了这些还是不直观，下面以`penv.macro`介绍下具体如何使用宏。
 
 penv.macro 用来在一个代码文件中统一管理你的环境变量, 并且只保留与当前环境变量匹配的值。与当前环境无关的代码被移除，确保不会将与指定环境不相干的代码发布到对应的环境上.
 
 1. `npm install --save-dev babel-plugin-macros` 修改babel配置文件在plugins中 添加 macros （使用宏功能必须有这一步，提供一个运行宏的环境）
 2. `npm install penv.macro --save-dev`
-3. 编写源码
 ``` JavaScript
 import env from 'penv.macro'
 
@@ -197,13 +222,13 @@ const BASE_URL = env({
     const BASE_URL = (() => 'https://production.example.com')()
 ```
 
-宏为我们提供了解决问题的另一种思路,所有的宏都以/macro为后缀，在代码中显式引用，在需要的地方调用具体的 宏，也能方便对功能的理解（使用插件，语法被转换了，可能不清楚是什么原因造成的)，增加新的宏也不需要修改babel的配置，同时也能避免插件顺序配置问题导致的冲突。这里有一些可用的[宏列表](https://github.com/jgierer12/awesome-babel-macros) 另外把插件转换为宏也很容易，比如 上面介绍的 preval、和codegen插件就有对应的 preval.macro 和 codegen.macro。也有人[基于codegen.macro来实现国际化方案](https://medium.freecodecamp.org/using-babel-macros-with-react-native-8615aaf5b7df)。另外更好的国际化方案可以使用 [@lingui/macro](https://lingui.js.org/ref/macro.html)
+宏为我们提供了解决问题的另一种思路,所有的宏都以/macro为后缀，在代码中显式导入宏，在需要的地方调用具体的宏，也能方便对功能的理解，心里也清楚这行代码要被Babel macro来转换（若使用插件，语法被转换了，可能不清楚是什么原因造成的)，增加新的宏也不需要修改babel的配置，同时也能避免插件顺序配置问题导致的冲突。这里有一些可用的[宏列表](https://github.com/jgierer12/awesome-babel-macros) 另外把插件转换为宏也很容易，比如 上面介绍的 preval、和codegen插件就有对应的 preval.macro 和 codegen.macro。也有人[基于codegen.macro来实现国际化方案](https://medium.freecodecamp.org/using-babel-macros-with-react-native-8615aaf5b7df)。另外更好的国际化方案可以使用 [@lingui/macro](https://lingui.js.org/ref/macro.html)
 
 
 ### 总结
 写了这些 希望能对babel有一些了解，Babel不止可以用来做标准的语法转换，还可以帮助我们通过使用编译手段来解决工程化的一些问题，Babel API给我们提供了方便操作语法树的工具，让定制需求变的简单。本文更多的是介绍一些思路以及学习方向，很多东西要写，受限于笔墨，没有写太多，里面涉及到的知识点，都可以深入来研究，另外文章中涉及链接文章都有很好的指导意义。
 
-##### 学习资料 这些好好看完就成babel高手了
+#### 学习资料 这些好好看完就成babel高手了
 - [babel官网](https://babeljs.io/docs/en/) [以及相关博客](https://babeljs.io/blog/)
 - [Babel 插件开发](https://xiaoiver.github.io/coding/2018/05/12/Babel-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91.html)
 - [http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/](http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/)
