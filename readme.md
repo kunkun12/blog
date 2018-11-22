@@ -146,7 +146,7 @@ babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-pre
 运行babel之后编译的代码为
 ![](https://raw.githubusercontent.com/kunkun12/blog/master/imgs/2.jpg)
 ，可以看到 _regenerator(即regeneratorRuntime)以局部变量的形式被引入了，非上面的全局作用域。另外 `asyncToGenerator`也作为一个工具函数被提取至`@babel/runtime`,通过导入包，以局部变量的形式在代码里面呈现。另外由于编译后的代码在执行的时候用到了 `@babel/runtime` 包里面的代码，因此安装依赖的包的时候，根据原则将安装到dependencies里面（--save) 。那么还有个问题，asyncToGenerator用了Promise，对于不支持Promise的浏览器依然会报错。解决方案就是 将corejs属性设置为2，意思是从 `@babel/runtime-corejs2`中去加载polyfill，这个里面asyncToGenerator里面包含了必要的依赖 比如`Promise` .需要先需要安装 runtime-corejs2: `npm install @babel/runtime-corejs2 --save`。设置完毕之后，重新编译代码结果(自行与上图对比前三行代码)
-![](https://raw.githubusercontent.com/kunkun12/blog/master/imgs/2.jpg)
+![](https://raw.githubusercontent.com/kunkun12/blog/master/imgs/4.jpg)
 
 查阅了一下 `@babel/runtime-corejs2/helpers/asyncToGenerator`模块 第一行也确实引入了promise，部分内容如下
 ``` javascript
