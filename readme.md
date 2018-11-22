@@ -86,7 +86,7 @@ Babel语法转换的本质是:将源代码解析为AST后、对AST进行遍历�
             ],
         });
 ```
-babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)来转换正式版ES语法，目前preset-env===ES3+ES5+ES2015+ES2016+ES2017，还有三个比较常用的preset（ typescript flow react）,之前的stage0~stage3 在Babel 7中已经被干掉了。对于目前处于草案的语法需要手动添加相关plugin。具体到特定的语法是否为草案还是正式标准可以去[babel的插件列表](https://babeljs.io/docs/en/plugins)看一下，不要被这么多插件吓到，其实也没多少，不必熟知，尽量都要清楚每个插件的作用。另外babel-preset-env 还支持根据指定代码的环境，来过滤语法转换，用来表示来支持到什么程度，比如浏览器版本，Node版本，通过这样等减少一些不必要的转换，降低冗余代码
+babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)来转换正式版ES语法，目前preset-env===ES3+ES5+ES2015+ES2016+ES2017，还有三个比较常用的preset（ typescript flow react）,之前的stage0~stage3四个preset 在Babel 7中已经被干掉了。对于目前处于草案的语法需要手动添加相关plugin。具体到特定的语法是否为草案还是正式标准可以去[babel的插件列表](https://babeljs.io/docs/en/plugins)看一下，不要被这么多插件吓到，其实也没多少，不必熟知，尽量都要清楚每个插件的作用。另外babel-preset-env 还支持根据指定代码的环境，来过滤语法转换，用来表示来支持到什么程度，比如浏览器版本，Node版本，通过这样等减少一些不必要的转换，降低冗余代码
 
 关于plugin和preset执行顺序，Babel遍历到每个AST节点的时候，按规则来执行plugin和preset。执行规则就是 :先执顺序行完所有Plugin，再逆序执行Preset。这个配置的时候可能注意。有时候出错的话，可能跟这个执行顺序有关。仔细想一下，那么多节点，都要被每个插件轮流执行一遍。这个对性能影响也是很大的。所以尽量用具体的babel plugin来配置，干掉stage的preset从一方面避免了这个问题。如果不配置插件任何插件及preset、babel对代码不会做做任何转换 将会输出最初的代码。关于具体的配置，简单介绍下对async/await以及decorators配置方式。
 
