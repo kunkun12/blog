@@ -5,23 +5,23 @@
 (本文叙述的内容所涉及到的相关特性以Babel V7为准)
 
 Babel :原名6to5 2014.9发布第一个版本, 2015.2更名为babel，由团队来为维护，Babel取名灵感来自于[BabelFish](https://en.wikipedia.org/wiki/List_of_races_and_species_in_The_Hitchhiker%27s_Guide_to_the_Galaxy#Babel_fish) 是一种虚拟出来的鱼,可以翻译任何物种的语言，Babel也不负盛名，成了目前最知名的JavaScript语法“编译器”、一种源码转译源码到编译器(source-to-source)。官方说是[compiler](https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8)、也有人称之为transpiler(转译器)，stackoverflow也有人提问[Is Babel a compiler or transpiler?](https://stackoverflow.com/questions/43968748/is-babel-a-compiler-or-transpiler)。总结一下大致意思，编译器是将一种语言转为另一种相对低级一些的语言（比如 Java到字节码。C到二进制)。 转移器是将一种语言转为另一种同等级别的代码(比如JavaScript to python),那么ES6 到 ES5 算同一个level的转换吗？？自行理解吧。 
-对我们来说Babel是JavaScript语法转换工具或是翻译工具,因此不必太纠结compiler还是transpiler 。除了能够转换标准ES以及草案之外，它还支持JSX、typescript、flow。 另外babel方便的插件扩展机制，众多的开发者也相继开发出许多babel插件，让babel不只是作为一个工具 更是一个平台
+对我们来说Babel是JavaScript语法转换工具或是翻译工具,因此不必太纠结compiler还是transpiler 。除了能够转换标准ES以及草案之外，它还支持JSX、typescript、flow。 另外babel方便灵活的插件扩展机制，众多的开发者也相继开发出许多babel插件，让babel不再只是作为一个工具 更是一个平台。
 
-### babel的组成
- babel是一个组合套装，拆分为了几十个包，均在`@babel`命名空间下
+### Babel的组成
+ Babel是一个组合套装，拆分为几十个包，均在`@babel`命名空间下
 #### 核心部件
  
 - @babel/parser (原名Babylon) 基于 [acorn](https://github.com/acornjs/acorn) and [acorn-jsx](https://github.com/RReverser/acorn-jsx)。用于语法解析
-- @babel/traverse 遍历AST 调用Plugin转换代码
-- @babel/generator  将AST生成代码
+- @babel/traverse 遍历AST、调用Plugin转换代码
+- @babel/generator  将转换后的AST生成代码
 - @babel/core  转换流程控制器，整合 parser、traverse plugin generator 完成语法转换。
 - 一堆plugin+5个preset
 
 babel的编译流程如下：
 
-1. Parse 词法分析得到 Tokens，JS代码生成 [抽象语法树（AST)](https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9)
-2. Transform 遍历语法树，通过Babel-plugin操作 AST，完成语法树的改变。
-3. Code Generate 将新的语法树生成代码。
+1. Parse 词法分析得到 Tokens，把JS代码解析为 [抽象语法树（AST)](https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9)
+2. Transform 遍历语法树，通过Babel-plugin操作 AST，改变语法树。
+3. Generate Code 新的语法树生成代码。
 
 总结 ：输入字符串 -> @babel/parser parser -> AST -> traverse ->@babe/plugin--xxxx-> AST -> @babel/generator -> 输出字符串
 #### 辅助包
@@ -195,10 +195,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
 
 关于Babel插件的使用也有一些小问题:
 
-- 在看一个项目的代码的时候，无法确定代码是否要经由一个插件转换，容易造成迷惑
+- 在看一个项目的代码的时候，无法确定代码是否要经由一个插件转换，对于新人阅读代码 容易造成迷惑
 - 启用一个插件 必须修改babel的配置文件或者webpack的配置
 - 遍历节点的时候，执行多个插件 可能会造成冲突，带来困扰
-这个时候就有一种需求：不改变babel配置的情况下，在应用的代码里面动态为特定的代码应用指定的语法转换，babel macros就是满足为了这个需求，babel macros 的想法的来源于[create-react-app的一个issue](https://github.com/facebook/create-react-app/issues/2730)，目前macros已经在create-react-app中使用了，(create-react-app不推荐用户自行修改配置文件)。宏的功能与babel plugin功能上差不多，babel plugin的引入需要在babel的配置文件中添加配置，只是宏是让我们可以对手动指定的代码进行语法转换的。babel 有许多plugin，也有许多的macro可用，不同的宏功能不同。macro的出现让我们在代码中手动的使用babel的转换功能。
+
+这个时候就有一种需求：不改变Babel配置的情况下，在应用的代码里面动态为特定的代码应用指定的语法转换，babel macros就是满足为了这个需求，babel macros 的想法的来源于[create-react-app的一个issue](https://github.com/facebook/create-react-app/issues/2730)，目前macros已经在create-react-app中使用了，(create-react-app不推荐用户自行修改配置文件)。宏的功能与babel plugin功能上差不多，babel plugin的引入需要在babel的配置文件中添加配置，只是宏是让我们可以对手动指定的代码进行语法转换的。babel 有许多plugin，也有许多的macro可用，不同的宏功能不同。macro的出现让我们在代码中手动的使用babel的转换功能。
 
 
 如果是使用macros 需要先安装babel-plugin-macros，启用macros的能力 `npm install --save-dev babel-plugin-macros` 。babel-plugin-macros 不是一个具体的macro，只是给macro提供了一个运行的平台，不具有转换特定代码的功能，第一次使用宏的时候，需要在babel配置文件`plugins`里面添加`macros`、之后使用具体的宏不需要再改babel的配置。这里可以查看具体可用的[macros](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/macros.md) 根据需求安装对应的macros 在代码里面使用即可。说了这些还是不直观，下面以`penv.macro`介绍下具体如何使用宏。
