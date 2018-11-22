@@ -87,7 +87,7 @@ Babel语法转换的本质是:将源代码解析为AST后、对AST进行遍历�
             ],
         });
 ```
-babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)来转换正式版ES语法，目前preset-env===ES3+ES5+ES2015+ES2016+ES2017，还有三个比较常用的preset（ typescript flow react）,之前的stage0~stage3四个preset 在Babel 7中已经被干掉了。对于目前处于草案的语法需要手动添加相关plugin。具体到特定的语法是否为草案还是正式标准可以去[babel的插件列表](https://babeljs.io/docs/en/plugins)看一下，不要被这么多插件吓到，其实也没多少，不必熟知，尽量都要清楚每个插件的作用。另外babel-preset-env 还支持根据指定代码的环境，来过滤语法转换，用来表示来支持到什么程度，比如浏览器版本，Node版本，通过这样等减少一些不必要的转换，降低冗余代码
+babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)来转换正式版ES语法，目前preset-env===ES3+ES5+ES2015+ES2016+ES2017，还有三个比较常用的preset（ typescript flow react）,之前的stage0~stage3四个preset 在Babel 7中已经被干掉了。对于目前处于草案的语法需要手动添加相关plugin。具体到特定的语法是否为草案还是正式标准可以去[babel的插件列表](https://babeljs.io/docs/en/plugins)看一下，不要被这么多插件吓到，其实也没多少，不必熟知，尽量都要清楚每个插件的作用。另外babel-preset-env 还支持根据指定代码的环境对语法的支持程度，来过滤语法转换，用来表示来支持到什么程度，比如[浏览器版本](https://github.com/browserslist/browserslist)，Node版本，通过这样等减少一些不必要的转换，降低冗余代码
 
 关于plugin和preset执行顺序，Babel遍历到每个AST节点的时候，按规则来执行plugin和preset。执行规则就是 :先执顺序行完所有Plugin，再逆序执行Preset。这个配置的时候可能注意。有时候出错的话，可能跟这个执行顺序有关。仔细想一下，那么多节点，都要被每个插件轮流执行一遍。这个对性能影响也是很大的。所以尽量用具体的babel plugin来配置，干掉stage的preset从一方面避免了这个问题。如果不配置插件任何插件及preset、babel对代码不会做做任何转换 将会输出最初的代码。关于具体的配置，简单介绍下对async/await以及decorators配置方式。
 
@@ -230,8 +230,13 @@ const BASE_URL = env({
 ### 总结
 写了这些 希望能对babel有一些了解，Babel不止可以用来做标准的语法转换，还可以帮助我们通过使用编译手段来解决工程化的一些问题，Babel API给我们提供了方便操作语法树的工具，让定制需求变的简单。本文更多的是介绍一些思路以及学习方向，很多东西要写，受限于笔墨，没有写太多，里面涉及到的知识点，都可以深入来研究，另外文章中涉及链接文章都有很好的指导意义。
 
+
+### One More things 关于babel作者的八卦
+
+6to5 的作者 Sebastian McKenzie是个澳大利亚人，8岁的时候发布的自己第一个网站，2014年17岁的在高中的时候开始玩github 然后第一次commit 就是 6to5，在项目上很上心，bug反馈几分钟之后就能被修复，因为一直盯着电脑，没有别的事情做。。。不喜欢上学，成绩不好，没有上大学，想找个nodeJS 初级工程师的工作，简历上也附上自己项目的代码，然而也多次碰壁，对他做的事情也不感兴趣。。辛苦之下好不容易在11月在悉尼份找到一份工作，没谈薪资就把offer接了。干了三个月去伦敦CloudFlare。2015年去了美国加入了CloudFlare 可以开心的写node了。。。2015.2月 年6to5 改名为Babel。[2015-6月 facebook 宣布 React and React Native的构建系统基于Babel替换自家的自家的JSTransform](https://reactjs.org/blog/2015/06/12/deprecating-jstransform-and-react-tools.html) ，一个月之后 Sebastian 加入facebook。
+
 #### 学习资料 这些好好看完就成babel高手了
-- [babel官网](https://babeljs.io/docs/en/) [以及相关博客](https://babeljs.io/blog/)
+- [babel官网](https://babeljs.io/docs/en/)、 [以及相关博客](https://babeljs.io/blog/)
 - [Babel 插件开发](https://xiaoiver.github.io/coding/2018/05/12/Babel-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91.html)
 - [http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/](http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/)
 - [babel-plugin-macros](https://github.com/kentcdodds/babel-plugin-macros)
@@ -252,3 +257,4 @@ const BASE_URL = env({
 - ["How Writing a Babel Plugin is like jQuery"](https://www.henryzoo.com/babel-plugin-slides/assets/player/KeynoteDHTMLPlayer.html#16)
 - [Babel Types Documentation](https://babeljs.io/docs/en/babel-types)
 - [All about macros](http://slides.com/kentcdodds/macros#/)
+- Babel作者自述[2015 in review](https://medium.com/@sebmck/2015-in-review-51ac7035e272)

@@ -6,3 +6,14 @@ function getFriends() {
 
 
 const a = 1
+
+
+
+async function printFiles () {
+  const files = await getFilePaths();
+
+  for (const file of files) {
+    const contents = await fs.readFile(file, 'utf8');
+    console.log(contents);
+  }
+}
