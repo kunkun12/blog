@@ -49,7 +49,8 @@ babel 编译输出结果
 ```
 `String.prototype.padStart` 是 ES(7) 正式版的规范，因此会自动引入pad-start的polyfill、而 [`trimLeft`](https://github.com/tc39/proposal-string-left-right-trim)截止目前还在 `Stage 3`。需要自己手动引入`core-js(-pure)/features/string/trim-left`。
 
-        对于每一项新特性，要最终纳入ECMAScript规范中，TC39拟定了一个处理过程，称为[TC39 process](https://tc39.github.io/process-document/)、其中共包含5个阶段
+这里提一下，对于每一项新特性，要最终纳入ECMAScript规范中，TC39(指定ES标准的组织)拟定了一个处理过程，称为[TC39 process](https://tc39.github.io/process-document/)、其中共包含5个阶段:
+
         stage-0: (稻草人)只是一个想法
         stage-1: (提案)初步尝试
         stage-2: (曹稿)初步规范
