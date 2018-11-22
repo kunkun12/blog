@@ -1,0 +1,424 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<style>
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+						  text-transform: none;
+				  }
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+						### JavaScript 编译技术：Babel
+					</textarea>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### 相关名词
+
+
+						- ECMA
+						- ECMA262
+						- ECMAScript
+						- TC 39 
+						- JavaScript
+					</script>
+				</section>
+				<section data-markdown>
+						<script type="text/template">
+							### TC39 Process
+	
+	
+							- stage-0: (稻草人)只是一个想法
+							- stage-1: (提案)初步尝试
+							- stage-2: (草稿)初步规范
+							- stage-3: (候选)完成规范和浏览器初步实现
+							- stage-4: (定稿)代发版
+						</script>
+					</section>
+					<section data-markdown>
+							
+							<script type="text/template">
+								### ES6+ 规范
+
+								- 新的语法（const、let、async/await、decorators ）
+								- 新的API (Promise Map Set String.prototype.padStart )
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								## compiler  
+								## transpile
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### Babel
+								![](./images/1.jpg)
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								- 它还支持JSX、typescript、flow
+								- 插件扩展机制
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								##### Babel是目前最知名的 JavaScript 语法编译器,另一个是Google的Traceur，
+								Babel是现代前端的必备工具、还有啥？
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								##### 八卦一下 Babel的发展历史
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### 开始正题
+								- 基于NodeJS 
+								- 有一套组合包组成（核心包、工具包、辅助包)
+								![](./images/3.jpg)
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### AST (Abstract syntax tree)
+								<pre>
+									<code class="hljs" data-trim contenteditable>
+											function hello(){
+												const name = 'kk'
+											}
+									</code>
+								</pre>
+								![](./images/2.jpg) <!-- .element height="40%" width="40%"  float="left" -->
+								[JAVASCRIPT AST VISUALIZERl](https://resources.jointjs.com/demos/rappid/apps/Ast/index.htm)
+								[https://astexplorer.net/](https://astexplorer.net/)
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### 核心包
+								- @babel/parser (原名Babylon) 基于 [acorn](https://github.com/acornjs/acorn) and [acorn-jsx](https://github.com/RReverser/acorn-jsx)。
+								- @babel/traverse 
+								- @babel/generator  
+								- @babel/core  
+								- 众多的Plugin
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### 编译流程
+								1. Parse: 词法分析得到，把JS代码解析为 [抽象语法树（AST)](https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9)
+								2. Transform: 遍历AST，通过Babel-plugin操作 AST，改变语法树。
+								3. Generate Code: 把新的语法树生成代码。
+							</script>
+					</section>
+
+					<section data-markdown>
+							<script type="text/template">
+								#### 辅助包
+								-  `@babel/polyfill`
+								-   @babel/runtime 
+								-  `@babel/types` 、`@babel/template` 、`@babel/helpers`、`@`babel/code-frames` 
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### 其他包
+								- @babel/cli  
+								- @babel/node *
+								- @babel/register *
+							</script>
+						</section>		
+						<section data-markdown>
+								<script type="text/template">
+									### Babel Plugin
+									- ![](./images/4.jpg)
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### Babel Plugin
+									- ![](./images/5.jpg)
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### Preset
+									- babel-preset-env
+									- babel-preset-flow
+									- babel-preset-react
+									- ~~babel-preset-stage-0~~
+									- ~~babel-preset-stage-1~~
+									- ~~babel-preset-stage-2~~
+									- ~~babel-preset-stage-3~~
+									- babel-preset-typescript
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### 自定义Preset
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+									module.exports = () => ({
+										presets: [
+										  require("@babel/preset-env"),
+										],
+										plugins: [
+										  require("@babel/plugin-proposal-class-properties"),
+										  require("@babel/plugin-proposal-object-rest-spread"),
+										],
+									  });
+									</code>
+								</pre>
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### @babel/preset-env
+									- 相当于 ES3+ES5+ES2015+ES2016+ES2017
+									- 可根据指定的运行环境过滤转换规则
+								</script>
+						</section>
+					<section data-markdown>
+					  <script type="text/template">
+									### async/await语法的支持
+									需要保证对应的polyfill被引入 regeneratorRuntime、 Promise
+						 	<pre>
+								<code class="hljs" data-trim contenteditable>
+									{
+										"presets": [
+											[
+												"@babel/env",
+												{"useBuiltIns": "usage"}
+											]
+										]
+									}
+								</code>
+							</pre>
+						</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### async/await语法的支持
+								![](./images/6.jpg) <!-- .element  width="80%"  float="left" -->
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+										  ### async/await语法的支持 2
+								   <pre>
+									  <code class="hljs" data-trim contenteditable>
+											{
+												"presets": [["@babel/env"]],
+												"plugins": [
+												["@babel/plugin-transform-runtime", {
+													"corejs": 2,
+													"helpers": true,
+													"regenerator": true,
+													"useESModules": false
+												}]]
+											  }
+									  </code>
+								  </pre>
+							  </script>
+					 </section>
+					<section data-markdown>
+							<script type="text/template">
+										  ### 1 VS 2
+								   <pre>
+									  <code class="hljs" data-trim contenteditable>
+											var _interopRequireDefault = require("@babel/runtime-corejs2/helpers/interopRequireDefault");
+											var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
+											var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
+									  </code>
+								  </pre>
+								  <pre>
+										<code class="hljs" data-trim contenteditable>
+												require("regenerator-runtime/runtime");
+												require("core-js/modules/es6.promise");
+										</code>
+									</pre>
+							  </script>
+					</section>		
+
+
+					<section data-markdown>
+								<script type="text/template">
+									### Decrotors 语法支持
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+													{
+														"presets": [["@babel/env"]],
+														"plugins": [["@babel/plugin-proposal-decorators", {
+															"legacy": true
+														}]]
+													}
+												</code>
+											</pre>
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### 第三方Plugin
+									- [babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import) 
+									- [babel-plugin-preval](https://www.npmjs.com/package/babel-plugin-preval) 
+									- [babel-plugin-codegen](https://www.npmjs.com/package/babel-plugin-codegen)
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### babel-plugin-import
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+													import { Button } from 'antd';
+													ReactDOM.render(<Button>xxxx</Button>);
+													 
+														  ↓ ↓ ↓ ↓ ↓ ↓
+														  
+													var _button = require('antd/lib/button');
+													ReactDOM.render(<_button>xxxx</_button>);
+												</code>
+									</pre>
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### babel-plugin-preval
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+													const greeting = preval`const fs = require('fs')
+													module.exports = fs.readFileSync(require.resolve('./greeting.txt'), 'utf8')`
+													 
+														  ↓ ↓ ↓ ↓ ↓ ↓
+														  
+													const greeting = 'Hello world!'
+											</code>
+									</pre>
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### babel-plugin-codegen
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+														const array = ['apple', 'orange', 'pear']
+														module.exports = array.map(fruit => `export const ${fruit} = '${fruit}';`).join('')
+													 
+														  ↓ ↓ ↓ ↓ ↓ ↓
+														  
+														export const apple = 'apple'
+														export const orange = 'orange'
+														export const pear = 'pear'
+											</code>
+									</pre>
+								</script>
+						</section>
+					<section data-markdown>
+							<script type="text/template">
+								### Babel Plugins的一些小问题
+
+								- 在看一个项目的代码的时候，无法确定代码是否要经由一个插件转换，对于新人阅读代码 容易造成迷惑
+								- 启用一个插件 必须修改babel的配置文件或者webpack的配置
+								- 遍历节点的时候，执行多个插件 可能会造成冲突，带来困扰	
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								##### Babel Macros 
+								Enables zero-config, importable babel plugins
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								 功能上 每个宏与插件是类似的作用
+
+								 需要先修改babel配置添加 babel-plugin-macros 
+
+								 宏可以在代码中显式调用，启用宏需要两步
+
+								 使用具体的 宏 不再需要修改配置
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### 以penv.macro为例 
+								<pre>
+										<code class="hljs" data-trim contenteditable>
+												import env from 'penv.macro'
+
+												const BASE_URL = env({
+												  development: 'https://development.example.com',
+												  staging: 'https://staging.example.com',
+												  production: (() => 'https://production.example.com')(),
+												})
+												 
+												↓ ↓ ↓ ↓ ↓ ↓  process.env.NODE_ENV = 'production'
+													  
+												const BASE_URL = (() => 'https://production.example.com')()
+										</code>
+								</pre>
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								### 总结
+								 - 一些名字解释
+								 - babel 历史
+								 - babel 工作流程以及相关概念介绍
+		
+							</script>
+					</section>
+					<section data-markdown>
+							<script type="text/template">
+								##### THx
+							</script>
+					</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				fragmentInURL: true,
+				slideNumber: true,
+				history: true,
+				width: "100%",
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

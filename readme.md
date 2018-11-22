@@ -257,4 +257,5 @@ const BASE_URL = env({
 - ["How Writing a Babel Plugin is like jQuery"](https://www.henryzoo.com/babel-plugin-slides/assets/player/KeynoteDHTMLPlayer.html#16)
 - [Babel Types Documentation](https://babeljs.io/docs/en/babel-types)
 - [All about macros](http://slides.com/kentcdodds/macros#/)
+- [How to write simple babel macro](https://dev.to/stereobooster/how-to-write-simple-babel-macro-1al1)
 - Babel作者自述[2015 in review](https://medium.com/@sebmck/2015-in-review-51ac7035e272)
