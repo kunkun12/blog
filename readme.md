@@ -26,7 +26,7 @@ babel的编译流程如下：
 总结 ：输入字符串 -> @babel/parser parser -> AST -> traverse ->@babe/plugin--xxxx-> AST -> @babel/generator -> 输出字符串
 #### 辅助包
 -  `@babel/types` 、`@babel/template` 、`@babel/helpers`、`@`babel/code-frames`  方便操作语法树、提供的工具类，写插件的时候会用到
--  `@babel/polyfill`。ES标准中包括两部分: 新增的语法+新增的API。 Babel编译流程只提供了语法的转换(比如const、let、async、await、箭头函数等）， babel/polyfill是ES标准新增的原生对象以及API的模拟实现（比如`Promise`、`Map`、`Set`、`Object.assign`、`Array.from`、`Object.assig`等），其实`@babel/polyfill`上仅仅是`core-j`s和`regenerator-runtime`两个包的[简单封装](https://github.com/babel/babel/blob/master/packages/babel-polyfill/src/index.js)，之前版本中我们都是在文件的收口处手动的引入`babel polyfill`。整个PolyFill文件较大、没必要全部导入、也没必要手动导入、在babel V7之后推荐新的使用方法。通过配置 env选项的时候添加 ` "useBuiltIns":"usage"`,会自动分析代码根据需求来按需针对性的导入polyfill。另外polyfill是全局导入的，像`Array.prototype.includes`还会修改原生函数的原型。polyfill只包含了超过`stage4`以上的规范。如果要使用更高级草案标准的API 需要自己手动去引入[core-js](https://github.com/zloirock/core-js)里面的函数。举个例子 .babelrc配置文件如下
+-  `@babel/polyfill`。ES标准中包括两部分: 新增的语法+新增的API。 Babel编译流程只提供了语法的转换(比如const、let、async、await、箭头函数等）， babel/polyfill是ES标准新增的原生对象以及API的模拟实现（比如`Promise`、`Map`、`Set`、`Object.assign`、`Array.from`、`Object.assig`等），其实`@babel/polyfill`上仅仅是`core-j`s和`regenerator-runtime`两个包的[简单封装](https://github.com/babel/babel/blob/master/packages/babel-polyfill/src/index.js)，之前版本中我们都是在文件的收口处手动的引入`babel polyfill`。整个PolyFill文件较大、没必要全部导入、也没必要手动导入、在babel V7之后推荐新的使用方法。通过配置 env选项的时候添加 ` "useBuiltIns":"usage"`,会自动分析代码根据需求来按需针对性的导入polyfill。另外polyfill是全局导入的，像`Array.prototype.includes`还会修改原生函数的原型。polyfill只包含了超过`stage4`以上的规范。如果要使用更低级草案标准的API 需要自己手动去引入[core-js](https://github.com/zloirock/core-js)里面的函数。举个例子 .babelrc配置文件如下
 ``` javascript
         {
             "presets": [["@babel/env", {
@@ -92,7 +92,7 @@ babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-pre
 关于plugin和preset执行顺序，Babel遍历到每个AST节点的时候，按规则来执行plugin和preset。执行规则就是 :先执顺序行完所有Plugin，再逆序执行Preset。这个配置的时候可能注意。有时候出错的话，可能跟这个执行顺序有关。仔细想一下，那么多节点，都要被每个插件轮流执行一遍。这个对性能影响也是很大的。所以尽量用具体的babel plugin来配置，干掉stage的preset从一方面避免了这个问题。如果不配置插件任何插件及preset、babel对代码不会做做任何转换 将会输出最初的代码。关于具体的配置，简单介绍下对async/await以及decorators配置方式。
 
 #### 关于 async/await
-- async/await 在ES7的正式版发布了，目前属于ES的正式标准，理论上来说配置下env即可以使用了，但是上面也有提到 babel的plugin只做语法转换，通过env的配置可以将async，await语法转换为旧式的语法。但是转换后的的代码里面使用了Promise 和 regeneratorRuntime 这两个API。
+- async/await 在ES7的正式版发布了，目前属于ES的正式标准，理论上来说配置下env即可以使用了，但是上面也有提到 babel的plugin只做语法转换，env可以将async/await语法转换为旧式的语法。但是转换后的的代码里面使用了Promise 和 regeneratorRuntime 这两个API。
 
 如果配置为 
 
