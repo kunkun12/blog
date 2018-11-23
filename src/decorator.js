@@ -1,16 +1,16 @@
 
-@defineElement('num-counter')
-class Counter extends HTMLElement {
+// @defineElement('num-counter')
+// class Counter extends HTMLElement {
 
-  constructor() {
-    super();
+//   constructor() {
+//     super();
  
-  }
+//   }
 
-  connectedCallback() { this.render(); }
+//   connectedCallback() { this.render(); }
 
-  @bound
-  render() {
+//   @bound
+//   render() {
 
-  }
-}
+//   }
+// }

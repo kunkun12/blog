@@ -86,8 +86,8 @@
 					</section>
 					<section data-markdown>
 							<script type="text/template">
-								##### Babel是目前最知名的 JavaScript 语法编译器,另一个是Google的Traceur，
-								Babel是现代前端的必备工具、还有啥？
+								目前最知名的 JavaScript 语法编译器
+								现代前端的必备工具
 							</script>
 					</section>
 					<section data-markdown>
@@ -192,6 +192,27 @@
 										  require("@babel/plugin-proposal-object-rest-spread"),
 										],
 									  });
+									</code>
+								</pre>
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### 执行顺序
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+													{
+														"presets": [
+														  "a",
+														  "b",
+														  "c"
+														]
+														"plugins": [
+															"d",
+															"e",
+															"f"
+														  ]
+													  }
 									</code>
 								</pre>
 								</script>
@@ -337,6 +358,29 @@
 									</pre>
 								</script>
 						</section>
+						<section data-markdown>
+								<script type="text/template">
+									### 自定义Plugin
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+												import { flatten, join } from "lodash";
+												
+												↓ ↓ ↓ ↓ ↓ ↓
+
+												import flatten from "lodash/flatten";
+												import join from "lodash/join";
+											</code>
+									</pre>
+								</script>
+						</section>
+						<section data-markdown>
+								<script type="text/template">
+									- [babel-handbook](https://github.com/jamiebuilds/babel-handbook)
+									- [JavaScript AST VISUALIZERl](https://resources.jointjs.com/demos/rappid/apps/Ast/index.htm)、 [https://astexplorer.net/](https://astexplorer.net/)
+									-  *@babel/types* *@babel/template* *@babel/helpers* *@babel/code-frames*
+									![](./images/7.jpg)  <!-- .element  width="60%"  -->
+								</script>
+						</section>
 					<section data-markdown>
 							<script type="text/template">
 								### Babel Plugins的一些小问题
@@ -354,7 +398,7 @@
 					</section>
 					<section data-markdown>
 							<script type="text/template">
-								 功能上 每个宏与插件是类似的作用
+								 功能上 宏、插件是类似的作用
 
 								 需要先修改babel配置添加 babel-plugin-macros 
 

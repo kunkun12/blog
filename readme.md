@@ -254,7 +254,7 @@ const BASE_URL = env({
 - [James Kyle: How to Build a Compiler](https://www.youtube.com/watch?v=Tar4WgAfMr4)
 - [ESLint: Working with Plugins](https://eslint.org/docs/developer-guide/working-with-plugins)
 - [ESTree "spec"](https://github.com/estree/estree)
-- ["How Writing a Babel Plugin is like jQuery"](https://www.henryzoo.com/babel-plugin-slides/assets/player/KeynoteDHTMLPlayer.html#16)
+- ["How Writing a Babel Plugin is like jQuery"](https://www.henryzoo.com/babel-plugin-slides/assets/player/KeynoteDHTMLPlayer.html)
 - [Babel Types Documentation](https://babeljs.io/docs/en/babel-types)
 - [All about macros](http://slides.com/kentcdodds/macros#/)
 - [How to write simple babel macro](https://dev.to/stereobooster/how-to-write-simple-babel-macro-1al1)
