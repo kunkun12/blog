@@ -1,5 +1,7 @@
 #  JavaScript编译技术：Babel
 
+[技术分享PPT](http://kunkun12.com/blog/ppt/#/)
+
 ### compiler or transpiler?
 
 (本文叙述的内容所涉及到的相关特性以Babel V7为准)
