@@ -65,6 +65,7 @@ babel 编译输出结果
 - @babel/cli babel命令行工具
 - @babel/node nodeJS环境下使用babel的功能，由于性能问题不得在生产环境下使用
 - @babel/register 通过绑定node.js的require来自动转译require引用的js代码文件
+- [REPL](https://babeljs.io/repl) 在线体验工具
 
 ###  Babel Plugin
 
