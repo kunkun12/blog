@@ -16,7 +16,8 @@ Dart 是谷歌推出的面向对象的强类型语言，在2011年发布，一�
     }
 ```
 
-### 打印日志 dart 表达式要求必须结尾加分号
+### 打印日志 dart 
+表达式要求必须结尾加分号
 
 ``` dart
         void main(){
@@ -153,15 +154,15 @@ Unicode是一套字符集，涵盖了目前人类使用的所有字符， 为世
      			print(a.runes.toList());//[128518, 22909, 22909, 23398, 20064, 44]
 ```
 
-#### Symbol 不常用 ，在Dart中是不透明的，保存对人的可读的字符串以及被计算机优化过的字符串的的联系，用来表示反射后的元数据信息 。可以给类名以及函数名 声明为 symbol类型,一般用于反射操作 [可以参考>>](https://www.tutorialspoint.com/dart_programming/dart_programming_symbol.htm)
+#### Symbol 不常用 ，在Dart中是不透明的，保存对人的可读的字符串以及被计算机优化过的字符串的的联系，用来表示反射后的元数据信息 。可以给类名以及函数名 声明为 symbol类型,一般用于反射操作 [可以参考>>](https://www.tutorialspoint.com/dart_programming/dart_programming_symbol.htm)
 
-#### 函数 每个函数都属于`Function`类的实例，函数可以作为值赋值为一个变量，可以作为参数传递、也可以作为函数的返回值
+#### 函数 每个函数都属于`Function`类的实例，函数可以作为值赋值为一个变量，可以作为参数传递、也可以作为函数的返回值
 ``` dart 
-int Add(int a,int b) {
+int Add(int a,int b) {
   return a+b;
 }
 //可以忽略返回值类型
-int Add(int a,int b) {
+int Add(int a,int b) {
   return a+b;
 }
 //也可以使用类似ES6中的 箭头函数 
@@ -169,7 +170,7 @@ int Add(int a,int b)=>a+b;
 //函数作为参数
 list.forEach((item) => print(item));
 
-// 作为返回值
+// 作为返回值
 Function makeAdder(int addBy) {
     return (int i) => addBy + i;
 }
@@ -199,9 +200,9 @@ list.forEach((item) {
 });
 ```
 
-#### main 程序的入口、每个程序顶部必有一个main函数 返回值为 void，有默认的 ` List<String>`类型的参数。
+#### main 程序的入口、每个程序顶部必有一个main函数 返回值为 void，有默认的 ` List<String>`类型的参数。
 
-#### 词法作用域(静态作用域），JavaScript类似，在编写代码的时候就决定了变量的作用域
+#### 词法作用域(静态作用域），JavaScript类似，在编写代码的时候就决定了变量的作用域
 #### 闭包 函数内部访问外包的变量，外包的变量无法得到释放。与JavaScript闭包类似。
 ``` dart 
 Function addCount(){
@@ -242,7 +243,7 @@ querySelector('#confirm') // Get an object.
 
 #### 异常  Throw/Catch/Finally
 
-#### 类 Class
+#### 类 Class
 
 - 实例变量 构造
 ```  dart
@@ -254,7 +255,7 @@ class Point {
   var point = Point();
   point.x = 4; // 赋值
 ```
-- 构造函数 可以在类内部声明一个与类名一样的成员函数作为函数
+- 构造函数 可以在类内部声明一个与类名一样的成员函数作为函数
 ``` dart
 class Point {
   num x, y;
@@ -263,7 +264,7 @@ class Point {
     this.y = y;
   }
 }
-// 上面的代码可以简单为
+// 上面的代码可以简单为
 class Point {
   num x, y;
   Point(this.x, this.y=0);
@@ -291,7 +292,7 @@ class Point {
   Point.alongXAxis(num x) : this(x, 0);
 }
 ```
-- 如果在对象不会在运行时被修改，可以定义为常量
+- 如果在对象不会在运行时被修改，可以定义为常量
 ``` dart 
 class ImmutablePoint {
   static final ImmutablePoint origin =
@@ -303,9 +304,9 @@ class ImmutablePoint {
 ```
 - 工厂构造函数 使用 `factory` 声明工厂构造函数，可以使用缓存机制避免不断创建新的实例，工厂构造函数不能访问this
 - 成员方法、以及静态方法，静态属性
-- 属性 Getters and setters （与JS中的类似 ）赋值或者取值的时候 自动会调用方法
-- 抽象类 抽象方法 。`abstract`关键字前缀，抽象方法只能存在于抽象类中，用来定义接口。不实现具体的工作。
-- 显式定义接口，类可以作为接口，通过 关键字 `implements`来实现接口，对应的类，必须实现接口中的所有方法以及属性
+- 属性 Getters and setters （与JS中的类似 ）赋值或者取值的时候 自动会调用方法
+- 抽象类 抽象方法 。`abstract`关键字前缀，抽象方法只能存在于抽象类中，用来定义接口。不实现具体的工作。
+- 显式定义接口，类可以作为接口，通过 关键字 `implements`来实现接口，对应的类，必须实现接口中的所有方法以及属性
 ```
 // A person. The implicit interface contains greet().
 class Person {
@@ -323,7 +324,7 @@ class Impostor implements Person {
 ```
 - 使用 extends 来扩展类。
 - 支持重载成员方法`override`，以及对操作符的重载
-- noSuchMethod。如果用户调用类中不存在的成员方法，可以给出提示 重载 `noSuchMethod`
+- noSuchMethod。如果用户调用类中不存在的成员方法，可以给出提示 重载 `noSuchMethod`
 ```
 class A {
   @override
@@ -334,14 +335,14 @@ class A {
 }
 ```
 
-##### 枚举类型  Enumerated types ，每个值 都有一个index属性，从 0开始计数。 `Color.values`拿到所有的值，可以把在switch/case语句里面把枚举当做判断条件
+##### 枚举类型  Enumerated types ，每个值 都有一个index属性，从 0开始计数。 `Color.values`拿到所有的值，可以把在switch/case语句里面把枚举当做判断条件
 ``` dart
 enum Color { red, green, blue }
 Color.red.index == 0 
 ```
 #### 在扩展对象的同时 还可以使用 mixins功能给对象增加功能
 
-#### 泛型 用法与其他高级语言中的泛型一样 允许程序员在强类型程序设计语言中编写代码时定义一些可变的类型，那些部分在使用前必须作出指明。`Map` `List`xxi都基于泛型，具有相似功能的类，可以通过泛型实现，来避免代码的重复，提高抽象程度。可以定义泛型类 以及泛型的方法
+#### 泛型 用法与其他高级语言中的泛型一样 允许程序员在强类型程序设计语言中编写代码时定义一些可变的类型，那些部分在使用前必须作出指明。`Map` `List`xxi都基于泛型，具有相似功能的类，可以通过泛型实现，来避免代码的重复，提高抽象程度。可以定义泛型类 以及泛型的方法
 ``` dart
     var names = List<String>();
     names.addAll(['Seth', 'Kathy', 'Lars']);
@@ -375,10 +376,10 @@ import 'package:lib1/lib1.dart' show foo;
 import 'package:lib2/lib2.dart' hide foo;
 ```
 
-- 懒加载。在运行时按需加载用到的模块，适用于如下场景:
+- 懒加载。在运行时按需加载用到的模块，适用于如下场景:
 
 1. 减小App的启动时间
-2. 进行A/B测试，可选择的不同的算法实现
+2. 进行A/B测试，可选择的不同的算法实现
 3. 一些不常用的功能，没必要每次都启动
 
 ``` dart
@@ -399,7 +400,7 @@ function greet(){
     })
 }
 
-//或者
+//或者
 async function greet(){
   const hello=await import('./hello')
     hello.printGreeting()
@@ -407,11 +408,11 @@ async function greet(){
    
 ```
 
-import('./b') 返回的是一个Promise，Dart中的Future 跟ES6中的Promise类似，同时Dart中也有 async/await 与ES7中的async/await 功能类似
+import('./b') 返回的是一个Promise，Dart中的Future 跟ES6中的Promise类似，同时Dart中也有 async/await 与ES7中的async/await 功能类似
 
 #### 异步支持 ，对于异步的处理与 ES中的类似
 
--  async/await
+-  async/await
 -  [Future (promise)](https://api.dartlang.org/stable/2.1.0/dart-async/Future-class.html) 
 -  建议async/await配合try/catch使用
 
@@ -431,7 +432,7 @@ import('./b') 返回的是一个Promise，Dart中的Future 跟ES6中的Promise�
   			timer.cancel(); //输出结果  1   hello world
     }
 ```
-#### http请求 使用 `dart:io` 中的 [HttpClient](https://docs.flutter.io/flutter/dart-io/HttpClient-class.html)
+#### http请求 使用 `dart:io` 中的 [HttpClient](https://docs.flutter.io/flutter/dart-io/HttpClient-class.html)
 
 ``` dart
 import 'dart:io'
@@ -450,9 +451,11 @@ client.getUrl(Uri.parse("http://www.example.com/"))
 #### typedef 自定义类型 与 C中的typedef类似
 
 #### Dart支持注解编程
-注解用与Java中的注解 或者ES6中的 Decorator类似，内置了两个注解 `@deprecated` `@override`. 
+注解用与Java中的注解 或者ES6中的 Decorator类似，内置了两个注解 `@deprecated` `@override`. 
 
 #### isolate 隔离的代码执行环境，不同的isolate无法共享内存
 ### 小结
 
-学习了Dart的基础语法，感觉如果有其他的编程语言的话学起来 还是比较容易的，。Dart是一种强类型的语言，里面一切都是对象。Object是任何对象的基类。支持类型推断、支持泛型，让代码能减轻不少，支持接口编程、注解编程、Mixin。支持模块的按需加载。isolate提供了基于event-loop单线程模型，异步操作支持Future、async/await来写出同步化的代码。Dart支持AOT和JIT两种编译方式，保证了较好的开发体验，以及较高性能的线上模式。基本上掌握了这些可以上手撸Flutter了，Dart深入文档查看[官方文档](https://www.dartlang.org/guides/libraries/library-tour),有些API可能记不住的话可以去[API文档](https://api.dartlang.org/stable/2.1.0/index.html)查看。Dart 包基于Pub管理的，类似NodeJS中的NPM需要什么功能可以去Pub上去搜 https://pub.dartlang.org/
+学习了Dart的基础语法，感觉如果有其他的编程语言的话学起来 还是比较容易的，。Dart是一种强类型的语言，里面一切都是对象。Object是任何对象的基类。支持类型推断、支持泛型，让代码能减轻不少，支持接口编程、注解编程、Mixin。支持模块的按需加载。isolate提供了基于event-loop单线程模型，异步操作支持Future、async/await来写出同步化的代码。Dart支持AOT和JIT两种编译方式，保证了较好的开发体验，以及较高性能的线上模式。基本上掌握了这些可以上手撸Flutter了，Dart深入文档查看[官方文档](https://www.dartlang.org/guides/libraries/library-tour),有些API可能记不住的话可以去[API文档](https://api.dartlang.org/stable/2.1.0/index.html)查看。Dart 包基于Pub管理的，类似NodeJS中的NPM需要什么功能可以去Pub上去搜 https://pub.dartlang.org/
+
+构造对象可以不写new，语句结尾记得加分号
