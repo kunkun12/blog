@@ -158,46 +158,46 @@ Unicode是一套字符集，涵盖了目前人类使用的所有字符， 为世
 
 #### 函数 每个函数都属于`Function`类的实例，函数可以作为值赋值为一个变量，可以作为参数传递、也可以作为函数的返回值
 ``` dart 
-    int Add(int a,int b) {
-        return a+b;
-    }
-    //可以忽略返回值类型
-    int Add(int a,int b) {
-        return a+b;
-    }
-    //也可以使用类似ES6中的 箭头函数 
-    int Add(int a,int b)=>a+b;
-    //函数作为参数
-    list.forEach((item) => print(item));
+        int Add(int a,int b) {
+            return a+b;
+        }
+        //可以忽略返回值类型
+        int Add(int a,int b) {
+            return a+b;
+        }
+        //也可以使用类似ES6中的 箭头函数 
+        int Add(int a,int b)=>a+b;
+        //函数作为参数
+        list.forEach((item) => print(item));
 
-    // 作为返回值
-    Function makeAdder(int addBy) {
-        return (int i) => addBy + i;
-    }
-    // 调用的时候可以指定参数的名称
-    int Add({int a,int b})=>a+b;
-    // Add(a:1,b:2) 
+        // 作为返回值
+        Function makeAdder(int addBy) {
+            return (int i) => addBy + i;
+        }
+        // 调用的时候可以指定参数的名称
+        int Add({int a,int b})=>a+b;
+        // Add(a:1,b:2) 
 
-    const Scrollbar({Key key, @required Widget child}){} // @required指定必填的参数
+        const Scrollbar({Key key, @required Widget child}){} // @required指定必填的参数
 
-    // []指定可选参数
-    String say(String from, String msg, [String device]) {
-    var result = '$from says $msg';
-    if (device != null) {
-        result = '$result with a $device';
-    }
-    return result;
-    }
+        // []指定可选参数
+        String say(String from, String msg, [String device]) {
+            var result = '$from says $msg';
+            if (device != null) {
+                result = '$result with a $device';
+            }
+            return result;
+        }
 
-    //支持给参数默认值 
-    int Add({int a=1,int b=1})=>a+b;
-    Add(a:3)   //4
+        //支持给参数默认值 
+        int Add({int a=1,int b=1})=>a+b;
+        Add(a:3)   //4
 
-    // 匿名函数
-    var list = ['apples', 'bananas', 'oranges'];
-    list.forEach((item) {
-    print('${list.indexOf(item)}: $item');
-});
+        // 匿名函数
+        var list = ['apples', 'bananas', 'oranges'];
+        list.forEach((item) {
+            print('${list.indexOf(item)}: $item');
+        });
 ```
 
 #### main 程序的入口、每个程序顶部必有一个main函数 返回值为 void，有默认的 ` List<String>`类型的参数。
@@ -257,22 +257,22 @@ class Point {
 ```
 - 构造函数 可以在类内部声明一个与类名一样的成员函数作为函数
 ``` dart
-class Point {
-  num x, y;
-  Point(num x, num y=0) {
-    this.x = x;
-    this.y = y;
-  }
-}
-// 上面的代码可以简单为
-class Point {
-  num x, y;
-  Point(this.x, this.y=0);
-}
+        class Point {
+            num x, y;
+            Point(num x, num y=0) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        // 上面的代码可以简单为
+        class Point {
+            num x, y;
+            Point(this.x, this.y=0);
+        }
 ```
 - 命名的构造函数,命名的构造函数不能被继承，需要自己手动调用
 
-    ``` dart
+``` dart
         class Point {
             num x, y;
 
@@ -283,14 +283,14 @@ class Point {
                 y = 0;
             }
         }
-    ```
+```
 - 重定向构造函数，
 ``` dart 
-    class Point {
-        num x, y;
-        Point(this.x, this.y);
-        Point.alongXAxis(num x) : this(x, 0);
-    }
+        class Point {
+            num x, y;
+            Point(this.x, this.y);
+            Point.alongXAxis(num x) : this(x, 0);
+        }
 ```
 - 如果在对象不会在运行时被修改，可以定义为常量
 ``` dart 
