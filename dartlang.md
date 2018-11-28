@@ -11,18 +11,18 @@ Dart 是谷歌推出的面向对象的强类型语言，在2011年发布，一�
 
 
 ``` dart
-        void main(){
+void main(){
 
-        }
+}
 ```
 
 ### 打印日志 dart 
 表达式要求必须结尾加分号
 
 ``` dart
-        void main(){
-            print("Hello Word");
-        }
+void main(){
+    print("Hello Word");
+}
 ```
 ### 一些重要概念
 - 一切都是对象， Dart里面一切变量都是object、每一个object都是class的实例、。数字、布尔、函数、null 都是以对象的形式存在，所有的对象都继承于 `Object` 类
@@ -38,28 +38,28 @@ Dart 是谷歌推出的面向对象的强类型语言，在2011年发布，一�
 
 通过 `dynamic` 声明的变量，可以在运行时变更类型 比如
 ``` dart
-        void main(){
-            var name = 'kk'; // 效果与String name ='kk' 等同
-            name = 1; //编译报错
-        }
+void main(){
+    var name = 'kk'; // 效果与String name ='kk' 等同
+    name = 1; //编译报错
+}
 ```
 ``` dart
-        void main(){
-            dynamic name = 'kk';
-            name=1;
-            print(name); //1
-        }
+void main(){
+    dynamic name = 'kk';
+    name=1;
+    print(name); //1
+}
 ```
 如果我们不打算改变一个变量的值可以 使用 `final` 或者 `const`。`const`比`final`更加严格，const必须在编译时知道这个常量的值。final必须在变量声明是进行初始化，final只能被赋值一次，可以是常量以及动态计算的结果值
 ``` dart
-        int Func() {
-        // 代码
-        }
+int Func() {
+// 代码
+}
 
-        final int m1 = 60;
-        final int m2 = Func(); // 正确
-        const int n1 = 42;
-        const int n2 = Func(); // 错误,在编译的时候无法确定值。
+final int m1 = 60;
+final int m2 = Func(); // 正确
+const int n1 = 42;
+const int n2 = Func(); // 错误,在编译的时候无法确定值。
 ```
 
 #### 内置类型
@@ -82,21 +82,21 @@ Dart里面 所有的数据类型都属于对象类型，每个类型都有对应
 
 数字与字符串类型转换 `int.parse` `1.toString()`
 ``` dart
-        // String -> int
-        var one = int.parse('1');
-        assert(one == 1);
+// String -> int
+var one = int.parse('1');
+assert(one == 1);
 
-        // String -> double
-        var onePointOne = double.parse('1.1');
-        assert(onePointOne == 1.1);
+// String -> double
+var onePointOne = double.parse('1.1');
+assert(onePointOne == 1.1);
 
-        // int -> String
-        String oneAsString = 1.toString();
-        assert(oneAsString == '1');
+// int -> String
+String oneAsString = 1.toString();
+assert(oneAsString == '1');
 
-        // double -> String
-        String piAsString = 3.14159.toStringAsFixed(2);
-        assert(piAsString == '3.14');
+// double -> String
+String piAsString = 3.14159.toStringAsFixed(2);
+assert(piAsString == '3.14');
 ```
 #### [字符串](https://api.dartlang.org/stable/2.1.0/dart-core/String-class.html)
 - 基于UTF-16编码规则。定义字符串可以使用双引号或者单引号。与`JavaScript`一致。
@@ -104,18 +104,18 @@ Dart里面 所有的数据类型都属于对象类型，每个类型都有对应
 - 可以使用三个单引号或者三个双引号实现多行的字符串。如
 
 ``` dart
-        var s1 = '''
-        You can create
-        multi-line strings like this one.
-        ''';
+var s1 = '''
+You can create
+multi-line strings like this one.
+''';
 
-        var s2 = """This is also a
-        multi-line string.""";
+var s2 = """This is also a
+multi-line string.""";
 ```
 - 加 `r`前缀来表示原始的字符串 比如
 
 ```dart
-        var s = r'In a raw string, not even \n gets special treatment.';
+var s = r'In a raw string, not even \n gets special treatment.';
 ```
 
 #### 布尔值
@@ -125,22 +125,22 @@ Dart里面 所有的数据类型都属于对象类型，每个类型都有对应
 Dart里面数组被称为列表对象，可以像JavaScript中的方式来定义列表,通过设置`length`可以改变数组的大小（与JavaScript一致）。比如
 
 ```  dart
-        var l = ['张三','李四','王五'];
+var l = ['张三','李四','王五'];
 ```
 
 #### [Map](https://api.dartlang.org/stable/2.1.0/dart-core/Map-class.html) 。键值对的对象被称为 Map，Key可以为任何类型的对象，但不能重复。可以通过字面量 也可以通过 `Map`关键字来定义
 
 ``` dart
-        var gifts= {
-            'first':'partridge',
-            'second':'turtledoves',
-            'fifth': 'golden rings'
-        }
+var gifts= {
+    'first':'partridge',
+    'second':'turtledoves',
+    'fifth': 'golden rings'
+}
 
-        var gifts2 = Map();
-        gifts['first'] = 'partridge';
-        gifts['second'] = 'turtledoves';
-        gifts['fifth'] = 'golden rings';
+var gifts2 = Map();
+gifts['first'] = 'partridge';
+gifts['second'] = 'turtledoves';
+gifts['fifth'] = 'golden rings';
 ```
 ####  runes
 Dart 中 runes 是 UTF-32 字符集的 string 对象。
@@ -148,56 +148,56 @@ Unicode是一套字符集，涵盖了目前人类使用的所有字符， 为世
 字符串类型有几个属性可以来提取rune的信息，`codeUnitAt`  用来获取 UTF-16 字符集的字符。使用runes 来获取 UTF-32 字符集中的字符。使用`runes`可以获取字符串的rune  [rune更多API参考](https://api.dartlang.org/stable/2.1.0/dart-core/Runes-class.html)
 
 ``` dart
-        var a ='😆好好学习,';
-        print(a.codeUnitAt(0)); // 55357
-        print(a.codeUnits);//[55357, 56838, 22909, 22909, 23398, 20064, 44]
-        print(a.runes.toList());//[128518, 22909, 22909, 23398, 20064, 44]
+var a ='😆好好学习,';
+print(a.codeUnitAt(0)); // 55357
+print(a.codeUnits);//[55357, 56838, 22909, 22909, 23398, 20064, 44]
+print(a.runes.toList());//[128518, 22909, 22909, 23398, 20064, 44]
 ```
 
 #### Symbol 不常用 ，在Dart中是不透明的，保存对人的可读的字符串以及被计算机优化过的字符串的的联系，用来表示反射后的元数据信息 。可以给类名以及函数名 声明为 symbol类型,一般用于反射操作 [可以参考>>](https://www.tutorialspoint.com/dart_programming/dart_programming_symbol.htm)
 
 #### 函数 每个函数都属于`Function`类的实例，函数可以作为值赋值为一个变量，可以作为参数传递、也可以作为函数的返回值
 ``` dart 
-        int Add(int a,int b) {
-            return a+b;
-        }
-        //可以忽略返回值类型
-        int Add(int a,int b) {
-            return a+b;
-        }
-        //也可以使用类似ES6中的 箭头函数 
-        int Add(int a,int b)=>a+b;
-        //函数作为参数
-        list.forEach((item) => print(item));
+int Add(int a,int b) {
+    return a+b;
+}
+//可以忽略返回值类型
+int Add(int a,int b) {
+    return a+b;
+}
+//也可以使用类似ES6中的 箭头函数 
+int Add(int a,int b)=>a+b;
+//函数作为参数
+list.forEach((item) => print(item));
 
-        // 作为返回值
-        Function makeAdder(int addBy) {
-            return (int i) => addBy + i;
-        }
-        // 调用的时候可以指定参数的名称
-        int Add({int a,int b})=>a+b;
-        // Add(a:1,b:2) 
+// 作为返回值
+Function makeAdder(int addBy) {
+    return (int i) => addBy + i;
+}
+// 调用的时候可以指定参数的名称
+int Add({int a,int b})=>a+b;
+// Add(a:1,b:2) 
 
-        const Scrollbar({Key key, @required Widget child}){} // @required指定必填的参数
+const Scrollbar({Key key, @required Widget child}){} // @required指定必填的参数
 
-        // []指定可选参数
-        String say(String from, String msg, [String device]) {
-            var result = '$from says $msg';
-            if (device != null) {
-                result = '$result with a $device';
-            }
-            return result;
-        }
+// []指定可选参数
+String say(String from, String msg, [String device]) {
+    var result = '$from says $msg';
+    if (device != null) {
+        result = '$result with a $device';
+    }
+    return result;
+}
 
-        //支持给参数默认值 
-        int Add({int a=1,int b=1})=>a+b;
-        Add(a:3)   //4
+//支持给参数默认值 
+int Add({int a=1,int b=1})=>a+b;
+Add(a:3)   //4
 
-        // 匿名函数
-        var list = ['apples', 'bananas', 'oranges'];
-        list.forEach((item) {
-            print('${list.indexOf(item)}: $item');
-        });
+// 匿名函数
+var list = ['apples', 'bananas', 'oranges'];
+list.forEach((item) {
+    print('${list.indexOf(item)}: $item');
+});
 ```
 
 #### main 程序的入口、每个程序顶部必有一个main函数 返回值为 void，有默认的 ` List<String>`类型的参数。
@@ -205,17 +205,17 @@ Unicode是一套字符集，涵盖了目前人类使用的所有字符， 为世
 #### 词法作用域(静态作用域），JavaScript类似，在编写代码的时候就决定了变量的作用域
 #### 闭包 函数内部访问外包的变量，外包的变量无法得到释放。与JavaScript闭包类似。
 ``` dart 
-        Function addCount(){
-            int count =0;
-            return  ()=>count++;
-        }
-        void main(){
-            var countFn = addCount();
-            int a=countFn();
-            int b = countFn();
-                print(a); //0
-                print(b); //1
-        }
+Function addCount(){
+    int count =0;
+    return  ()=>count++;
+}
+void main(){
+    var countFn = addCount();
+    int a=countFn();
+    int b = countFn();
+        print(a); //0
+        print(b); //1
+}
 ```
 ### 操作符 `&` `|` `~` `++` `--` `+` `-` `*` `==` `>=` 等等之类的，这个跟其他语言没啥区别不提了 (dart中没有 `===`)
 
@@ -227,10 +227,10 @@ querySelector('#confirm') // Get an object.
   ..onClick.listen((e) => window.alert('Confirmed!'));
 
   //等同于
-  var button = querySelector('#confirm');
-  button.text = 'Confirm';
-  button.classes.add('important');
-  button.onClick.listen((e) => window.alert('Confirmed!'));
+var button = querySelector('#confirm');
+button.text = 'Confirm';
+button.classes.add('important');
+button.onClick.listen((e) => window.alert('Confirmed!'));
 ```
 
 #### 控制语句 
@@ -252,53 +252,53 @@ class Point {
   num y=0; //初始值为0
 }
 
-  var point = Point();
-  point.x = 4; // 赋值
+var point = Point();
+point.x = 4; // 赋值
 ```
 - 构造函数 可以在类内部声明一个与类名一样的成员函数作为函数
 ``` dart
-        class Point {
-            num x, y;
-            Point(num x, num y=0) {
-                this.x = x;
-                this.y = y;
-            }
-        }
-        // 上面的代码可以简单为
-        class Point {
-            num x, y;
-            Point(this.x, this.y=0);
-        }
+class Point {
+    num x, y;
+    Point(num x, num y=0) {
+        this.x = x;
+        this.y = y;
+    }
+}
+// 上面的代码可以简单为
+class Point {
+    num x, y;
+    Point(this.x, this.y=0);
+}
 ```
 - 命名的构造函数,命名的构造函数不能被继承，需要自己手动调用
 
 ``` dart
-        class Point {
-            num x, y;
+class Point {
+    num x, y;
 
-            Point(this.x, this.y);
-            
-            Point.origin() {
-                x = 0;
-                y = 0;
-            }
-        }
+    Point(this.x, this.y);
+    
+    Point.origin() {
+        x = 0;
+        y = 0;
+    }
+}
 ```
 - 重定向构造函数，
 ``` dart 
-        class Point {
-            num x, y;
-            Point(this.x, this.y);
-            Point.alongXAxis(num x) : this(x, 0);
-        }
+class Point {
+    num x, y;
+    Point(this.x, this.y);
+    Point.alongXAxis(num x) : this(x, 0);
+}
 ```
 - 如果在对象不会在运行时被修改，可以定义为常量
 ``` dart 
-        class ImmutablePoint {
-            static final ImmutablePoint origin = const ImmutablePoint(0, 0);
-            final num x, y;
-            const ImmutablePoint(this.x, this.y);
-        }
+class ImmutablePoint {
+    static final ImmutablePoint origin = const ImmutablePoint(0, 0);
+    final num x, y;
+    const ImmutablePoint(this.x, this.y);
+}
 ```
 - 工厂构造函数 使用 `factory` 声明工厂构造函数，可以使用缓存机制避免不断创建新的实例，工厂构造函数不能访问this
 - 成员方法、以及静态方法，静态属性
@@ -307,70 +307,70 @@ class Point {
 - 显式定义接口，类可以作为接口，通过 关键字 `implements`来实现接口，对应的类，必须实现接口中的所有方法以及属性
 ```dart
 // A person. The implicit interface contains greet().
-        class Person {
-            final _name;
-            Person(this._name);
-            String greet(String who) => 'Hello, $who. I am $_name.';
-        }
+class Person {
+    final _name;
+    Person(this._name);
+    String greet(String who) => 'Hello, $who. I am $_name.';
+}
 
 // 必须实现接口中的所有方法属性
-        class Impostor implements Person {
-            get _name => '';
-            String greet(String who) => 'Hi $who. Do you know who I am?';
-        }
+class Impostor implements Person {
+    get _name => '';
+    String greet(String who) => 'Hi $who. Do you know who I am?';
+}
 ```
 - 使用 extends 来扩展类。
 - 支持重载成员方法`override`，以及对操作符的重载
 - noSuchMethod。如果用户调用类中不存在的成员方法，可以给出提示 重载 `noSuchMethod`
 ``` dart
-        class A {
-            @override
-            void noSuchMethod(Invocation invocation) {
-                print('You tried to use a non-existent member: ' +
-                    '${invocation.memberName}');
-            }
-        }
+class A {
+    @override
+    void noSuchMethod(Invocation invocation) {
+        print('You tried to use a non-existent member: ' +
+            '${invocation.memberName}');
+    }
+}
 ```
 
 ##### 枚举类型  Enumerated types ，每个值 都有一个index属性，从 0开始计数。 `Color.values`拿到所有的值，可以把在switch/case语句里面把枚举当做判断条件
 ``` dart
-        enum Color { red, green, blue }
-        Color.red.index == 0 
+enum Color { red, green, blue }
+Color.red.index == 0 
 ```
 #### 在扩展对象的同时 还可以使用 mixins功能给对象增加功能
 
 #### 泛型 用法与其他高级语言中的泛型一样 允许程序员在强类型程序设计语言中编写代码时定义一些可变的类型，那些部分在使用前必须作出指明。`Map` `List`xxi都基于泛型，具有相似功能的类，可以通过泛型实现，来避免代码的重复，提高抽象程度。可以定义泛型类 以及泛型的方法
 ``` dart
-        var names = List<String>();
-        names.addAll(['Seth', 'Kathy', 'Lars']);
-        names.add(42); // Err
+var names = List<String>();
+names.addAll(['Seth', 'Kathy', 'Lars']);
+names.add(42); // Err
 
 
-        var names = <String>['张三', '李四', '王五'];
-        var pages = <String, int>{
-            '张三': 11,
-            '李四': 12,
-            '王五': 13
-        };
+var names = <String>['张三', '李四', '王五'];
+var pages = <String, int>{
+    '张三': 11,
+    '李四': 12,
+    '王五': 13
+};
 ```
 ### 模块化
 
 - 使用 `import` 导入模块
 ``` dart
-        import 'package:lib1/lib1.dart';
-        import 'package:lib2/lib2.dart' as lib2;
+import 'package:lib1/lib1.dart';
+import 'package:lib2/lib2.dart' as lib2;
 
-        // Uses Element from lib1.
-        Element element1 = Element();
+// Uses Element from lib1.
+Element element1 = Element();
 
-        // Uses Element from lib2.
-        lib2.Element element2 = lib2.Element();
+// Uses Element from lib2.
+lib2.Element element2 = lib2.Element();
 ````
 - 部分导入
 ```dart 只导入foo 模块
-        import 'package:lib1/lib1.dart' show foo;
-        // 导入 foo 之外的模块
-        import 'package:lib2/lib2.dart' hide foo;
+import 'package:lib1/lib1.dart' show foo;
+// 导入 foo 之外的模块
+import 'package:lib2/lib2.dart' hide foo;
 ```
 
 - 懒加载。在运行时按需加载用到的模块，适用于如下场景:
@@ -380,29 +380,28 @@ class Point {
 3. 一些不常用的功能，没必要每次都启动
 
 ``` dart
-        import 'package:greetings/hello.dart' deferred as hello;
+import 'package:greetings/hello.dart' deferred as hello;
 
-        Future greet() async {
-            await hello.loadLibrary();
-            hello.printGreeting();
-        }
+Future greet() async {
+    await hello.loadLibrary();
+    hello.printGreeting();
+}
 ```
 这种方式 跟ES6中 的 动态加载类似  如下
 
 ``` JavaScript
-        //这是JavaScript的代码
-        function greet(){
-            import('./hello').then(hello) => {
-                hello.printGreeting()
-            })
-        }
+//这是JavaScript的代码
+function greet(){
+    import('./hello').then(hello) => {
+        hello.printGreeting()
+    })
+}
 
-        //或者
-        async function greet(){
-        const hello=await import('./hello')
-            hello.printGreeting()
-        }
-        
+//或者
+async function greet(){
+const hello=await import('./hello')
+    hello.printGreeting()
+}
 ```
 
 ES 6 中 import('./hello') 返回的是一个Promise，Dart中的Future 跟ES6中的Promise类似，同时Dart中也有 async/await 与ES7中的async/await 功能类似
@@ -417,35 +416,35 @@ ES 6 中 import('./hello') 返回的是一个Promise，Dart中的Future 跟ES6�
 另外提一下  `Future.delayed` 可以异步延时执行代码，不支持取消, 我们`Timer` 来实现  JavaScript `setTimeout`操作，支持取消
 
 ``` dart
-        Future.delayed(const Duration(milliseconds: 10), ()=>print('hello world'));
+Future.delayed(const Duration(milliseconds: 10), ()=>print('hello world'));
 ```
 
 ``` dart
-        import 'dart:async';
+import 'dart:async';
 
-        void main(){
-                Timer(const Duration(milliseconds: 10), ()=>print('hello world'));
-                Timer timer= Timer(const Duration(milliseconds: 10), ()=>print('0'));
-                print('1');
-                timer.cancel(); //输出结果  1   hello world
-        }
+void main(){
+        Timer(const Duration(milliseconds: 10), ()=>print('hello world'));
+        Timer timer= Timer(const Duration(milliseconds: 10), ()=>print('0'));
+        print('1');
+        timer.cancel(); //输出结果  1   hello world
+}
 ```
 #### http请求 使用 `dart:io` 中的 [HttpClient](https://docs.flutter.io/flutter/dart-io/HttpClient-class.html)
 
 ``` dart
-        import 'dart:io'
-        HttpClient client = new HttpClient();
-        client.getUrl(Uri.parse("http://www.example.com/"))
-            .then((HttpClientRequest request) {
-            //do something
-            return request.close();
-            })
-            .then((HttpClientResponse response) {
-        });
+import 'dart:io'
+HttpClient client = new HttpClient();
+client.getUrl(Uri.parse("http://www.example.com/"))
+    .then((HttpClientRequest request) {
+    //do something
+    return request.close();
+    })
+    .then((HttpClientResponse response) {
+});
 ```
 #### Generators:  包含异步/同步两种generator 、与ES6中的类似
 
-#### typedef: 自定义类型 与 C中的typedef类似
+#### typedef: 自定义新的类型,与C中的typedef类似
 
 #### Dart支持注解编程
 注解用与Java中的注解 或者ES6中的 Decorator类似，内置了两个注解 `@deprecated` `@override`. 
