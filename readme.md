@@ -194,7 +194,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
 - babel-plugin-transform-remove-console 功能如其名
 
 
-
 ### Babel macros
 
 关于Babel插件的使用也有一些小问题:
@@ -221,7 +220,7 @@ const BASE_URL = env({
   production: (() => 'https://production.example.com')(),
 })
 ```
-假设编译的时候 env 为 process.env.NODE_ENV，编译后的结果为，功能上与webpack中的DefinePlugin功能类似，然而使用起来要感觉舒服很多。统一管理，不依赖webpack，方便就近维护
+假设编译的时候process.env.NODE_ENV为 production，编译后的结果如下，功能上与webpack中的DefinePlugin功能类似，然而使用起来要感觉舒服很多。统一管理，不依赖webpack，方便就近维护
 
 ``` javascript
     const BASE_URL = (() => 'https://production.example.com')()
