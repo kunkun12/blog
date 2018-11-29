@@ -220,7 +220,7 @@ const BASE_URL = env({
   production: (() => 'https://production.example.com')(),
 })
 ```
-假设编译的时候process.env.NODE_ENV为 production，编译后的结果如下，功能上与webpack中的DefinePlugin功能类似，然而使用起来要感觉舒服很多。统一管理，不依赖webpack，方便就近维护
+假设编译的时候 process.env.NODE_ENV 为 production，编译后的结果如下，这个功能与webpack中的DefinePlugin功能类似，然而这种方式使用起来要感觉舒服很多。统一管理，不依赖webpack的配置，也方便就近维护，同时也避免上线后混杂了其他环境下的代码
 
 ``` javascript
     const BASE_URL = (() => 'https://production.example.com')()
