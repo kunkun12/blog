@@ -95,7 +95,7 @@ babel7之后推荐使用[@babel/preset-env](https://babeljs.io/docs/en/babel-pre
 关于plugin和preset执行顺序，Babel遍历到每个AST节点的时候，按规则来执行plugin和preset。执行规则就是 :先执顺序行完所有Plugin，再逆序执行Preset。这个配置的时候可能注意。有时候出错的话，可能跟这个执行顺序有关。仔细想一下，那么多节点，都要被每个插件轮流执行一遍。这个对性能影响也是很大的。所以尽量用具体的babel plugin来配置，干掉stage的preset从一方面避免了这个问题。如果不配置插件任何插件及preset、babel对代码不会做做任何转换 将会输出最初的代码。关于具体的配置，简单介绍下对async/await以及decorators配置方式。
 
 #### 关于 async/await
-- async/await 在ES7的正式版发布了，目前属于ES的正式标准，理论上来说配置下env即可以使用了，但是上面也有提到 babel的plugin只做语法转换，env可以将async/await语法转换为旧式的语法。但是转换后的的代码里面使用了Promise 和 regeneratorRuntime 这两个API。
+- async/await 在ES8的正式版发布了，目前属于ES的正式标准，理论上来说配置下env即可以使用了，但是上面也有提到 babel的plugin只做语法转换，env可以将async/await语法转换为旧式的语法。但是转换后的的代码里面使用了Promise 和 regeneratorRuntime 这两个API。
 
 如果配置为 
 
